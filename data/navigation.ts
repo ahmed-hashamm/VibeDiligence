@@ -1,7 +1,7 @@
 export const NAV_LINKS = [
-  { label: "Product", href: "#features" },
-  { label: "Solutions", href: "#problem" },
-  { label: "Pricing", href: "#pricing" },
+  { label: ".Product ( )", href: "#features" },
+  { label: ".Solutions ( )", href: "#problem" },
+  { label: ".Pricing ( )", href: "#pricing" },
 ];
 
 export const FOOTER_COLUMNS = [

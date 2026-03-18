@@ -20,11 +20,11 @@ export default function ExampleReportPreview() {
             <div>
               <Badge variant="pink" className="mb-4">REAL-TIME PREVIEW</Badge>
               <h3 className="text-3xl font-bold">facebook/react</h3>
-              <p className="text-text-secondary text-sm font-mono mt-1">Audit ID: 8f2b-9a1c-5d3e</p>
+              <p className="text-secondary text-sm font-mono mt-1">Audit ID: 8f2b-9a1c-5d3e</p>
             </div>
             <div className="text-right">
               <div className="text-6xl font-bold text-success">94</div>
-              <div className="text-[10px] font-mono text-text-muted uppercase tracking-widest">Global Vibe Score</div>
+              <div className="text-[10px] font-mono text-muted uppercase tracking-widest">Global Vibe Score</div>
             </div>
           </div>
 
@@ -34,7 +34,7 @@ export default function ExampleReportPreview() {
                 <div className="h-full bg-success w-[94%]" />
               </div>
               <div className="flex justify-between text-xs font-mono">
-                <span className="text-text-secondary uppercase">Security</span>
+                <span className="text-secondary uppercase">Security</span>
                 <span className="text-success">98/100</span>
               </div>
               
@@ -42,7 +42,7 @@ export default function ExampleReportPreview() {
                 <div className="h-full bg-success w-[90%]" />
               </div>
               <div className="flex justify-between text-xs font-mono">
-                <span className="text-text-secondary uppercase">Quality</span>
+                <span className="text-secondary uppercase">Quality</span>
                 <span className="text-success">90/100</span>
               </div>
             </div>
@@ -52,7 +52,7 @@ export default function ExampleReportPreview() {
                 <span className="w-1.5 h-1.5 rounded-full bg-pink-500" />
                 KEY VERDICT
               </h4>
-              <p className="text-sm text-text-secondary leading-relaxed">
+              <p className="text-sm text-secondary leading-relaxed">
                 The codebase demonstrates exceptionally high maturity. Dependency management is strict, and security patterns follow industry best practices. Ready for institutional-grade deployment.
               </p>
             </div>

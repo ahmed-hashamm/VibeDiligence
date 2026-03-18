@@ -5,21 +5,29 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./animations/**/*.{js,ts,jsx,tsx,mdx}",
+    "./data/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
       colors: {
-        bg: '#08080F',
-        surface: '#0F0F1A',
-        'surface-raised': '#141428',
+        bg: 'var(--bg)',
+        surface: 'var(--surface)',
+        'surface-raised': 'var(--surface-raised)',
+        primary: 'var(--text-primary)',
+        secondary: 'var(--text-secondary)',
+        muted: 'var(--text-muted)',
+        border: 'var(--border)',
+        'border-glow': 'var(--border-glow)',
         pink: {
-          400: '#FF5588',
-          500: '#FF2D6B',
+          400: 'var(--pink-hover)',
+          500: 'var(--pink)',
         },
         purple: {
-          400: '#9B4FDE',
-          500: '#7B2FBE',
+          500: 'var(--purple)',
         },
+        success: 'var(--success)',
+        warning: 'var(--warning)',
+        danger: 'var(--danger)',
       },
       fontFamily: {
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],

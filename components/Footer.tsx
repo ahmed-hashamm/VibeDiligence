@@ -1,9 +1,15 @@
+/**
+ * @file Footer.tsx
+ * @description Site-wide footer with branding, navigation links, and social icons.
+ */
+
 import Link from "next/link";
 import { FOOTER_COLUMNS } from "@/data/navigation";
 import { Twitter, Linkedin, Github } from "lucide-react";
 
 /**
- * Footer: Brand info, Nav columns, and social links.
+ * Footer component.
+ * Displays brand description, multi-column navigation, and legal/social links.
  */
 export default function Footer() {
   return (
@@ -19,7 +25,7 @@ export default function Footer() {
                 Vibe<span className="text-pink-500">Diligence</span>
               </span>
             </Link>
-            <p className="text-text-secondary text-sm max-w-xs leading-relaxed mb-8">
+            <p className="text-secondary text-sm max-w-xs leading-relaxed mb-8">
               Engineering Truth. <br />
               Institutional-grade repository auditing for modern software teams.
             </p>
@@ -27,7 +33,7 @@ export default function Footer() {
 
           {FOOTER_COLUMNS.map((column) => (
             <div key={column.title}>
-              <h4 className="text-sm font-bold text-text-primary uppercase tracking-widest mb-6 px-1 border-l-2 border-pink-500">
+              <h4 className="text-sm font-bold text-primary uppercase tracking-widest mb-6 px-1 border-l-2 border-pink-500">
                 {column.title}
               </h4>
               <ul className="space-y-4">
@@ -35,7 +41,7 @@ export default function Footer() {
                   <li key={link.label}>
                     <Link 
                       href={link.href} 
-                      className="text-sm text-text-muted hover:text-pink-500 transition-colors"
+                      className="text-sm text-muted hover:text-pink-500 transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -47,18 +53,18 @@ export default function Footer() {
         </div>
 
         <div className="pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-xs font-mono text-text-muted">
-            © 2024 VibeDiligence. All rights reserved.
+          <p className="text-xs font-mono text-muted">
+            © {new Date().getFullYear()} VibeDiligence. All rights reserved.
           </p>
           
           <div className="flex items-center gap-6">
-            <a href="https://twitter.com" className="text-text-muted hover:text-pink-500 transition-colors">
+            <a href="https://twitter.com" className="text-muted hover:text-pink-500 transition-colors" target="_blank" rel="noopener noreferrer">
               <Twitter size={18} />
             </a>
-            <a href="https://linkedin.com" className="text-text-muted hover:text-pink-500 transition-colors">
+            <a href="https://linkedin.com" className="text-muted hover:text-pink-500 transition-colors" target="_blank" rel="noopener noreferrer">
               <Linkedin size={18} />
             </a>
-            <a href="https://github.com" className="text-text-muted hover:text-pink-500 transition-colors">
+            <a href="https://github.com" className="text-muted hover:text-pink-500 transition-colors" target="_blank" rel="noopener noreferrer">
               <Github size={18} />
             </a>
           </div>

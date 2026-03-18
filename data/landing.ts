@@ -1,3 +1,17 @@
+/**
+ * landing.ts - Central data for the VibeDiligence landing page.
+ * Includes text content, stats, incidents, feature lists, and example report data.
+ */
+
+export const HERO_CONTENT = {
+  badge: "System Online",
+  title_part1: "Engineering",
+  title_part2: "Truth.",
+  subheading: "Deep-tech due diligence designed for modern build security and production readiness.",
+  cta_primary: "Get Started",
+  cta_secondary: "View Sample Report",
+};
+
 export const TRUST_SIGNALS = [
   { name: "TechStars", logo: "/logos/techstars.svg" },
   { name: "Y Combinator", logo: "/logos/yc.svg" },
@@ -6,10 +20,38 @@ export const TRUST_SIGNALS = [
 ];
 
 export const LANDING_STATS = [
-  { value: "85%", label: "Reduction in audit costs" },
-  { value: "24h", label: "Average turnaround time" },
-  { value: "+100", label: "Projects audited this month" },
+  { value: "1,200+", label: "REPOSITORIES AUDITED" },
+  { value: "94%", label: "ISSUES FOUND BEFORE INVESTOR MEETING" },
+  { value: "< 60s", label: "AVERAGE REPORT DELIVERY TIME" },
 ];
+
+export const PROBLEM_CONTENT = {
+  heading: "Vibe coding ships fast.<br /><span class='text-pink-500'>Security issues ship faster.</span>",
+  incidents: [
+    {
+      type: "CRITICAL_VULNERABILITY",
+      content: "Hardcoded AWS credentials found in /utils/db.js. Exposed in public repo for 4 months.",
+      color: "red",
+    },
+    {
+      type: "SCALABILITY_BLOCKER",
+      content: "Recursive logic in auth middleware causes O(n^2) latency spikes at >1k concurrent users.",
+      color: "yellow",
+    },
+    {
+      type: "DUE_DILIGENCE_FAIL",
+      content: "34% of core logic depends on unmaintained libraries with known CVE exploits.",
+      color: "purple",
+    },
+  ],
+  cost_title: "The real cost of skipping due diligence",
+  scenarios: [
+    { name: "Security Breach Cleanup", cost: "$120k+", highlight: true },
+    { name: "Investor Pulls Funding", cost: "$2.5M - $10M", highlight: true },
+    { name: "Emergency Refactor", cost: "$45k / mo", highlight: false },
+    { name: "VibeDiligence Audit", cost: "$49", highlight: false, isProduct: true },
+  ],
+};
 
 export const REAL_WORLD_INCIDENTS = [
   {
@@ -26,91 +68,169 @@ export const REAL_WORLD_INCIDENTS = [
   },
 ];
 
+export const STEPS_CONTENT = {
+  eyebrow: "WORKFLOW PIPELINE",
+  heading: "How it works.",
+  subheading: "", // No subheading in screenshot
+};
+
 export const STEPS = [
   {
     number: "01",
-    title: "Source Integration",
-    description: "Connect your GitHub repository securely in seconds.",
+    title: "Secure Integration",
+    description: "Connect via read-only SSH key or GitHub App. Your source code never leaves your perimeter.",
+    badges: ["AES-256", "SOC2 Type II"],
   },
   {
     number: "02",
-    title: "Deep Read-Only Scrutiny",
-    description: "Our platform scans for production readiness, security, and scalability.",
+    title: "Neural Dependency Mapping",
+    description: "Our engine traverses your entire AST to identify circular dependencies and logic bottlenecks.",
   },
   {
     number: "03",
-    title: "Investment-Grade Report",
-    description: "Receive a comprehensive PDF with scores, issues, and a clear verdict.",
+    title: "Investor-Ready Reports",
+    description: "Receive a comprehensive PDF audit with an Investor Readiness Score.",
   },
 ];
+
+export const FEATURES_CONTENT = {
+  eyebrow: "ENGINE CAPABILITIES",
+  heading: "Technical depth for modern venture capital.",
+  subheading: "", // No subheading in screenshot
+};
 
 export const FEATURES = [
   {
-    title: "AUTOMATED SCANNING",
-    description: "Continuous monitoring of your repository.",
+    title: ".vulnerability_scan()",
+    description: "Continuous monitoring for CVEs, secrets in code, and logic-based security flaws.",
     icon: "Shield",
+    color: "pink",
   },
   {
-    title: "SECURITY AUDITS",
-    description: "Identify vulnerabilities before they reach production.",
-    icon: "Lock",
+    title: ".scalability_audit()",
+    description: "Predictive modeling of how your architecture handles 10x and 100x traffic spikes.",
+    icon: "Layers",
+    color: "purple",
   },
   {
-    title: "CODE QUALITY",
-    description: "Metrics on readability, maintainability, and complexity.",
-    icon: "Code",
+    title: ".debt_quantification()",
+    description: "We put a dollar amount on your technical debt to help prioritize refactoring efforts.",
+    icon: "Network",
+    color: "pink",
   },
 ];
+
+export const FAQS_CONTENT = {
+  heading: "Common Questions.",
+};
 
 export const FAQS = [
   {
-    question: "Is my code secure?",
-    answer: "Yes, we use read-only ephemeral sessions and never store your source code.",
+    question: "Is my source code stored on your servers?",
+    answer: "No. We use a proprietary \"In-Memory Analyzer\" that processes your AST in a transient execution environment. Once the audit is complete, the workspace is wiped. We never store your code.",
   },
   {
-    question: "How long does an audit take?",
-    answer: "Our automated engine delivers full results in under 24 hours.",
+    question: "How long does an average audit take?",
+    answer: "Standard repositories under 500k lines of code are typically analyzed in under 60 seconds. Larger monorepos may take up to 3 minutes.",
   },
   {
-    question: "What frameworks do you support?",
-    answer: "We support Next.js, React, Node.js, and most modern web frameworks.",
+    question: "What languages do you support?",
+    answer: "We support JavaScript, TypeScript, Python, Go, and Rust. Our engine is specifically optimized for modern web stacks and cloud-native architectures.",
   },
   {
-    question: "Does this replace a human audit?",
-    answer: "It complements and accelerates human review by catching low-level issues instantly.",
+    question: "Can I share the report with investors?",
+    answer: "Absolutely. Our reports are designed to be investment-grade and are frequently used in Seed to Series B due diligence rounds.",
+  },
+  {
+    question: "Do you offer a refund policy?",
+    answer: "If our engine fails to provide a meaningful audit for your repository, we offer a full 100% money-back guarantee.",
+  },
+  {
+    question: "Is this a replacement for a manual audit?",
+    answer: "It is a highly effective pre-audit and internal vetting tool. While it catches 90%+ of common vulnerabilities and architectural flaws, it complements final-stage human review.",
+  },
+  {
+    question: "How do you calculate the Readiness Score?",
+    answer: "The score is an aggregate of security posture, code maintainability, dependency health, and infrastructure configurations.",
+  },
+  {
+    question: "Can I use this for pre-seed due diligence?",
+    answer: "Yes, it's perfect for verifying early-stage codebases before committing to an angel or pre-seed investment.",
   },
 ];
 
+export const PRICING_CONTENT = {
+  eyebrow: "PRICING",
+  heading: "Investment-Grade Plans",
+  subheading: "ENGINEERING CLARITY FOR TEAMS AND INDIVIDUALS.",
+};
+
 export const PRICING_TIERS = [
   {
-    name: "AUDIT",
+    name: "STANDARD AUDIT",
     price: "$49",
-    description: "Perfect for single project due diligence.",
+    description: "/PER_AUDIT",
     features: [
-      "3-Factor Scan (Security, Quality, Readiness)",
-      "24-Hour Delivery",
-      "Private Dashboard Teaser",
-    ],
-    isHighlighted: false,
-    cta: "START AUDIT",
-  },
-  {
-    name: "PROFESSIONAL",
-    price: "$149",
-    description: "For serious investors & technical teams.",
-    features: [
-      "Full Stack Diligence",
-      "DDO-Grade PDF Report",
-      "Investment Readiness Scoring",
-      "Direct Analyst Email Support",
+      "UNLIMITED_RESCAN",
+      "FULL_ARCH_DEEP_DIVE",
+      "PDF_EXPORT",
+      "PRIORITY_CI_CD",
     ],
     isHighlighted: true,
-    cta: "GO PREMIUM",
+    cta: "SELECT STANDARD",
+  },
+  {
+    name: "SERIES A+ AUDIT",
+    price: "$149",
+    description: "/PER_AUDIT",
+    features: [
+      "CONTINUOUS_MONITOR",
+      "TEAM_ACCESS_5_USERS",
+      "SLACK_INTEGRATION",
+      "CUSTOM_COMPLIANCE_MAPPING",
+    ],
+    isHighlighted: false,
+    cta: "SELECT PRO",
   },
 ];
 
 export const REASSURANCES = [
-  "No subscription. Pay per audit.",
-  "Trusted by leading VCs.",
-  "100% Secure & Confidential.",
+  "YOUR CODE IS NEVER STORED",
+  "REPORT READY IN 60 SECONDS",
+  "REFUND IF WE FAIL TO DELIVER",
 ];
+
+export const CTA_CONTENT = {
+  heading: "Find out what your investors will see before they do.",
+  subheading: "Submit your repository. Get your full audit report in under 60 seconds.",
+  cta: "START AUDIT — $49 →",
+};
+
+export const EXAMPLE_REPORT_DATA = {
+  repo: "facebook/react",
+  date: "March 15, 2024",
+  version: "18.2.0",
+  global_score: 94,
+  verdict: "Ready to Scale",
+  verdict_desc: "Institutional-grade maturity. This codebase represents the gold standard for performance and scalability.",
+  metrics: [
+    { label: "Security", score: 98, status: "0 Critical, 0 High vulnerabilities detected.", color: "success" },
+    { label: "Scalability", score: 82, status: "Potential bottlenecks in concurrent state updates.", color: "warning" },
+    { label: "Code Quality", score: 91, status: "Strict typing and consistent architectural patterns.", color: "success" },
+    { label: "Readiness", score: 100, status: "CI/CD pipelines and testing coverage at max capacity.", color: "success" },
+  ],
+  findings: [
+    {
+      title: "Virtual DOM Optimization",
+      desc: "Reconciliation algorithms are highly optimized for leaf-node updates.",
+      priority: "LOW PRIORITY",
+      variant: "success" as const, // For Badge
+    },
+    {
+      title: "State Management Bottleneck",
+      desc: "High frequency updates in deep trees could benefit from transition signals.",
+      priority: "MEDIUM PRIORITY",
+      variant: "warning" as const, // For Badge
+    },
+  ]
+};

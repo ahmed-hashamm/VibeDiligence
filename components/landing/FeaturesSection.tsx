@@ -1,32 +1,58 @@
-import { SectionHeader } from "@/components/ui/SectionHeader";
+/**
+ * @file FeaturesSection.tsx
+ * @description Showcases the core capabilities of the VibeDiligence engine.
+ */
+
 import { Card } from "@/components/ui/Card";
-import { FEATURES } from "@/data/landing";
-import * as Icons from "lucide-react";
+import { ShieldCheck, Layers, Network, Zap } from "lucide-react";
+import { FEATURES, FEATURES_CONTENT } from "@/data/landing";
+import { cn } from "@/lib/utils";
 
 /**
- * FeaturesSection: Showcases key capabilities.
+ * FeaturesSection component.
+ * Showcases the core capabilities of the VibeDiligence engine.
+ * Matches the design exactly: 3-column grid with mono function-style titles.
  */
 export default function FeaturesSection() {
   return (
-    <section id="features" className="w-full py-24 md:py-32 bg-bg relative">
-      <div className="container mx-auto px-6 relative z-10">
-        <SectionHeader
-          eyebrow="Capabilities"
-          heading="Everything you need to <br /> audit with confidence."
-          subheading="We combine static analysis with agentic reasoning to find what standard linters miss."
-        />
+    <section id="features" className="w-full py-16 md:py-24 bg-bg relative overflow-hidden">
+      <div className=" mx-auto px-12 relative z-10">
+        {/* Header */}
+        <div className="mb-20 text-center md:text-left">
+          <div className="text-[10px] font-mono font-bold text-pink-500 uppercase tracking-[0.4em] mb-4">
+            {FEATURES_CONTENT.eyebrow}
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold text-primary tracking-tight max-w-2xl mx-auto md:mx-0">
+            {FEATURES_CONTENT.heading}
+          </h2>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 max-w-6xl mx-auto">
+        {/* 3-Column Feature Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {FEATURES.map((feature) => {
-            // @ts-ignore
-            const Icon = Icons[feature.icon] || Icons.Zap;
+            // Map icon string to component
+            const Icon = feature.icon === 'Shield'
+              ? ShieldCheck
+              : feature.icon === 'Layers'
+                ? Layers
+                : feature.icon === 'Network'
+                  ? Network
+                  : Zap;
+
+            const colorClass = feature.color === 'pink' ? 'text-pink-500' : 'text-purple-500';
+
             return (
-              <Card key={feature.title} className="flex flex-col items-start p-8 bg-surface/50 border-white/5 hover:bg-surface/80">
-                <div className="p-3 rounded-xl bg-pink-500/10 text-pink-500 border border-pink-500/20 mb-6 group-hover:bg-pink-500 group-hover:text-white transition-all duration-300">
-                  <Icon size={24} />
+              <Card
+                key={feature.title}
+                className="flex flex-col items-start p-10 bg-surface/30 border-white/5 hover:border-white/10 transition-colors group min-h-[320px]"
+              >
+                <div className={cn("mb-8", colorClass)}>
+                  <Icon size={32} strokeWidth={1.5} />
                 </div>
-                <h3 className="text-lg font-bold mb-3 tracking-widest uppercase">{feature.title}</h3>
-                <p className="text-text-secondary text-sm leading-relaxed">
+                <h3 className="text-xl font-mono font-bold text-primary mb-6">
+                  {feature.title}
+                </h3>
+                <p className="text-secondary text-sm md:text-base leading-relaxed">
                   {feature.description}
                 </p>
               </Card>
@@ -34,6 +60,9 @@ export default function FeaturesSection() {
           })}
         </div>
       </div>
+
+      {/* Decorative Blur */}
+      <div className="absolute top-1/2 right-0 w-96 h-96 bg-pink-500/5 blur-[120px] pointer-events-none" />
     </section>
   );
 }

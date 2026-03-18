@@ -1,11 +1,20 @@
+/**
+ * @file Card.tsx
+ * @description Standardized card component with themed hover effects.
+ */
+
 import { cn } from "@/lib/utils";
 
+/**
+ * CardProps interface.
+ */
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   isHighlighted?: boolean;
 }
 
 /**
- * Reusable Card component with hover states and optional highlight.
+ * Card component.
+ * Base container for content sections with optional highlight styling.
  */
 export const Card = ({ className, isHighlighted, ...props }: CardProps) => {
   return (

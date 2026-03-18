@@ -1,9 +1,15 @@
+/**
+ * @file not-found.tsx
+ * @description Custom 404 error page for the VibeDiligence platform.
+ */
+
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import GridBackground from "@/animations/svgs/GridBackground";
 
 /**
- * NotFound: Custom 404 page.
+ * NotFound component.
+ * Rule: Handles the 404 state with a themed design.
  */
 export default function NotFound() {
   return (
@@ -14,7 +20,7 @@ export default function NotFound() {
         <h1 className="text-[12rem] font-bold text-pink-500/20 leading-none select-none">404</h1>
         <div className="-mt-12 mb-12">
           <h2 className="text-4xl font-bold mb-4">Repo not found.</h2>
-          <p className="text-text-secondary text-lg">
+          <p className="text-secondary text-lg">
             Wait, did you move it? We can't find the page you're looking for.
           </p>
         </div>

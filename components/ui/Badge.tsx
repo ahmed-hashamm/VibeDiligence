@@ -1,12 +1,21 @@
+/**
+ * @file Badge.tsx
+ * @description Flexible badge component for status indicators and labels.
+ */
+
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
+/**
+ * BadgeProps interface.
+ */
 interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: "pink" | "success" | "warning" | "danger" | "outline";
 }
 
 /**
- * Reusable Badge component.
+ * Badge component.
+ * Displays small status indicators or labels with themed variants.
  */
 export const Badge = ({ className, variant = "outline", ...props }: BadgeProps) => {
   const variantClasses = {
@@ -14,7 +23,7 @@ export const Badge = ({ className, variant = "outline", ...props }: BadgeProps) 
     success: "bg-success/10 text-success border-success/20",
     warning: "bg-warning/10 text-warning border-warning/20",
     danger: "bg-danger/10 text-danger border-danger/20",
-    outline: "border-border text-text-secondary bg-surface",
+    outline: "border-border text-secondary bg-surface",
   };
 
   return (

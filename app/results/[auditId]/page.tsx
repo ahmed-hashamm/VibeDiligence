@@ -46,8 +46,8 @@ export default function ResultsPage({ params }: { params: { auditId: string } })
               </div>
 
               <h3 className="text-3xl font-bold mb-4">Report Locked</h3>
-              <p className="text-text-secondary mb-8 leading-relaxed">
-                Your institutional-grade audit for <span className="text-text-primary font-bold">organization/private-repo</span> is ready.
+              <p className="text-secondary mb-8 leading-relaxed">
+                Your institutional-grade audit for <span className="text-primary font-bold">organization/private-repo</span> is ready.
                 Pay once to unlock the full interactive report and PDF download.
               </p>
 
@@ -68,7 +68,7 @@ export default function ResultsPage({ params }: { params: { auditId: string } })
 
               <div className="flex flex-col gap-4">
                 <Button className="w-full py-4 text-lg h-auto">Unlock Report • $49</Button>
-                <div className="flex items-center justify-center gap-4 text-[10px] font-mono text-text-muted uppercase">
+                <div className="flex items-center justify-center gap-4 text-[10px] font-mono text-muted uppercase">
                   <span>SECURE PADDLE CHECKOUT</span>
                   <span>•</span>
                   <span>INSTANT ACCESS</span>
@@ -80,7 +80,7 @@ export default function ResultsPage({ params }: { params: { auditId: string } })
 
         {/* Support Link */}
         <div className="mt-20 text-center">
-          <p className="text-sm text-text-muted mb-4">Questions about this audit?</p>
+          <p className="text-muted mb-4">Questions about this audit?</p>
           <a href="mailto:support@vibediligence.com" className="flex items-center justify-center gap-2 text-pink-500 hover:text-pink-400 font-medium transition-colors">
             <ShieldIcon size={16} /> Contact Support
           </a>

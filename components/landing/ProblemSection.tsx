@@ -1,78 +1,101 @@
-import { SectionHeader } from "@/components/ui/SectionHeader";
+/**
+ * @file ProblemSection.tsx
+ * @description Highlights the technical and financial risks of "vibe-coding" without due diligence.
+ */
+
 import { Card } from "@/components/ui/Card";
-import { AlertTriangle, TrendingUp, CheckCircle2 } from "lucide-react";
+import { AlertTriangle, AlertCircle, Info } from "lucide-react";
+import { PROBLEM_CONTENT } from "@/data/landing";
+import { cn } from "@/lib/utils";
 
 /**
- * ProblemSection: Highlights the cost of bad code with a two-card layout.
+ * ProblemSection component.
+ * Displays high-stakes technical risks and the financial cost of technical debt.
+ * Matches the design exactly: Split view with incidents and cost table.
  */
 export default function ProblemSection() {
-  const risks = [
-    "Authentication & Permission leaks",
-    "Scalability bottlenecks in DB layer",
-    "Third-party dependency vulnerabilities",
-    "Production readiness failures",
-  ];
-
   return (
-    <section id="problem" className="w-full py-24 md:py-32 bg-bg relative overflow-hidden">
-      <div className="container mx-auto px-6 relative z-10">
-        <SectionHeader
-          eyebrow="The Hard Truth"
-          heading="Vibe-coding ships fast. <br /> Security issues ship faster."
-          subheading="A 'good vibe' isn't enough when millions are on the line. Traditional audits are too slow for modern build cycles."
-        />
+    <section id="problem" className="w-full py-16 md:py-24 bg-bg relative overflow-hidden">
+      <div className=" mx-auto px-12 relative z-10">
+        {/* Centered Heading */}
+        <div className="text-center mb-20">
+          <h2
+            className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1]"
+            dangerouslySetInnerHTML={{ __html: PROBLEM_CONTENT.heading }}
+          />
+        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {/* Left Card: The Risk */}
-          <Card className="p-8 lg:p-12 bg-surface/30 border-white/5 group hover:border-pink-500/30 transition-all duration-500">
-            <div className="inline-flex p-3 rounded-xl bg-pink-500/10 text-pink-500 border border-pink-500/20 mb-8">
-              <AlertTriangle size={24} />
-            </div>
-            <h3 className="text-3xl font-bold mb-6 text-text-primary leading-tight">
-              Your codebase is your biggest asset—and your biggest liability.
-            </h3>
-            <div className="space-y-4">
-              {risks.map((risk) => (
-                <div key={risk} className="flex items-center gap-3 text-text-secondary">
-                  <CheckCircle2 size={18} className="text-pink-500 shrink-0" />
-                  <span className="text-sm font-medium">{risk}</span>
-                </div>
-              ))}
-            </div>
-          </Card>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+          {/* Left Column: Alerts/Incidents */}
+          <div className="space-y-6">
+            {PROBLEM_CONTENT.incidents.map((incident) => {
+              const Icon = incident.color === 'red' ? AlertTriangle : incident.color === 'yellow' ? AlertCircle : Info;
+              const colorClass = incident.color === 'red' ? 'text-danger' : incident.color === 'yellow' ? 'text-warning' : 'text-purple-500';
+              const bgColorClass = incident.color === 'red' ? 'bg-danger/10' : incident.color === 'yellow' ? 'bg-warning/10' : 'bg-purple-500/10';
 
-          {/* Right Card: The Cost */}
-          <Card className="p-8 lg:p-12 bg-surface/30 border-white/5 overflow-hidden relative group hover:border-pink-500/30 transition-all duration-500">
-            <div className="inline-flex p-3 rounded-xl bg-pink-500/10 text-pink-500 border border-pink-500/20 mb-8">
-              <TrendingUp size={24} />
-            </div>
-            <h3 className="text-3xl font-bold mb-6 text-text-primary leading-tight">
-              The Real cost of technical debt.
+              return (
+                <Card
+                  key={incident.type}
+                  className="p-6 bg-surface/30 border-white/5 flex gap-6 items-start hover:border-white/10 transition-colors group"
+                >
+                  <div className={cn("p-2 rounded-lg shrink-0", bgColorClass, colorClass)}>
+                    <Icon size={24} />
+                  </div>
+                  <div>
+                    <div className="text-[10px] font-mono font-bold text-muted uppercase tracking-[0.2em] mb-3">
+                      {incident.type}
+                    </div>
+                    <p className="text-sm md:text-base text-secondary leading-relaxed group-hover:text-primary transition-colors">
+                      {incident.content}
+                    </p>
+                  </div>
+                </Card>
+              );
+            })}
+          </div>
+
+          {/* Right Column: Cost Table */}
+          <div className="lg:sticky lg:top-32">
+            <h3 className="text-2xl font-bold mb-8 text-primary">
+              {PROBLEM_CONTENT.cost_title}
             </h3>
-            <p className="text-text-secondary text-base leading-relaxed mb-8">
-              Finding critical issues during active due diligence can tank your valuation by 30-40% or kill the deal entirely.
-            </p>
-            
-            {/* Mock Visual: Table/Graph Area */}
-            <div className="w-full h-48 bg-bg/50 rounded-xl border border-white/5 p-6 flex flex-col justify-end gap-2 relative group-hover:bg-pink-500/[0.02] transition-colors">
-              <div className="flex items-end gap-2 h-full">
-                <div className="w-full bg-white/5 rounded-t-sm h-[20%]" />
-                <div className="w-full bg-white/5 rounded-t-sm h-[35%]" />
-                <div className="w-full bg-white/5 rounded-t-sm h-[50%]" />
-                <div className="w-full bg-pink-500/20 rounded-t-sm h-[80%] border-t-2 border-pink-500 shadow-[0_0_15px_rgba(255,46,109,0.3)]" />
+
+            <div className="rounded-2xl bg-surface/30 border border-white/5 overflow-hidden">
+              <div className="grid grid-cols-2 px-8 py-4 border-b border-white/5 text-[10px] font-mono font-bold text-muted uppercase tracking-widest">
+                <span>SCENARIO</span>
+                <span className="text-right">ESTIMATED COST</span>
               </div>
-              <div className="flex justify-between text-[10px] font-mono text-text-muted mt-2">
-                <span>SEED</span>
-                <span>SERIES A</span>
-                <span>SERIES B</span>
-                <span className="text-pink-500 font-bold uppercase tracking-tighter">Diligence</span>
+
+              <div className="divide-y divide-white/5">
+                {PROBLEM_CONTENT.scenarios.map((s) => (
+                  <div
+                    key={s.name}
+                    className={cn(
+                      "grid grid-cols-2 px-8 py-6 items-center transition-colors",
+                      s.isProduct ? "bg-[#2d0a11] hover:bg-[#3d0d16]" : "hover:bg-white/[0.02]"
+                    )}
+                  >
+                    <span className={cn(
+                      "text-sm font-bold",
+                      s.isProduct ? "text-white" : s.highlight ? "text-[#ff4444]" : "text-white/90"
+                    )}>
+                      {s.name}
+                    </span>
+                    <span className={cn(
+                      "text-right font-mono font-bold",
+                      s.isProduct ? "text-white" : s.highlight ? "text-[#ff4444]" : "text-muted"
+                    )}>
+                      {s.cost}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
-          </Card>
+          </div>
         </div>
       </div>
 
-      {/* Background Decorative element */}
+      {/* Background Decorative Bloom */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-pink-500/5 blur-[150px] pointer-events-none" />
     </section>
   );
