@@ -4,37 +4,189 @@
  */
 
 import { Shield, Lock, Zap, Server, CreditCard, Cloud } from "lucide-react";
+import { LegalContent } from "@/types/audit";
 
-export const PRIVACY_CONTENT = {
-  eyebrow: "Legal",
-  heading: "Privacy Policy — VibeDiligence",
-  subheading: "Last updated: March 18, 2024. Your privacy and IP protection are our highest priorities.",
+export const PRIVACY_CONTENT: LegalContent = {
+  eyebrow: "COMPLIANCE POLICY V1.0",
+  heading: "Privacy <span class='text-pink-500'>—</span> VibeDiligence",
+  // subheading: "and VibeDiligence, the solution with vibe.",
+  lastUpdated: "Last updated: March 19, 2026",
+  intro: "VibeDiligence ('we', 'us', or 'our') is a product of VibeDiligence Limited (represented by vibediligence.com). This Privacy Policy explains what personal data we collect, how we use it, and your rights regarding that data.",
+  acknowledgement: "By using VibeDiligence, you acknowledge that you have read and understood this Privacy Policy.",
+  contactLine: "For any privacy-related inquiries, contact us at: support@vibediligence.com",
   sections: [
     {
-      title: "1. Information We Collect",
-      content: "We collect repository URLs and temporary access tokens to perform audits. We also collect basic account information if you choose to create a profile."
+      id: "1",
+      title: "What Data We Collect",
+      subsections: [
+        {
+          id: "1.1",
+          title: "DATA YOU PROVIDE DIRECTLY",
+          content: "When you submit an audit request:",
+          bullets: [
+            "Repository URL (Public repositories only)",
+            "Your GitHub user handle (Optional, used for your audit history)"
+          ],
+          nestedContent: "When you contact support:",
+          nestedBullets: [
+            "Your name, email address, and the content of your message.",
+            "Any other information you choose to provide (e.g. project context)"
+          ]
+        },
+        {
+          id: "1.2",
+          title: "DATA COLLECTED AUTOMATICALLY",
+          content: "Through our website:",
+          bullets: [
+            "Device and browser information (User Agent)",
+            "IP address (used for rate limiting and security)",
+            "Usage data (pages visited, time spent, etc.)"
+          ]
+        },
+        {
+          id: "1.3",
+          title: "DATA FROM THIRD PARTIES",
+          content: "From GitHub:",
+          bullets: [
+            "Public repository metadata (name, description, etc.)",
+            "Public commit history and activity for analysis"
+          ],
+          nestedContent: "From Paddle:",
+          nestedBullets: [
+            "Payment confirmation (we do not see your credit card details)"
+          ]
+        }
+      ]
     },
     {
-      title: "2. How We Use Your Data",
-      content: "Your code is analyzed in real-time in isolated, ephemeral environments. We never use your proprietary code to train our AI models."
+      id: "2",
+      title: "How We Use Your Data",
+      table: {
+        headers: ["DATA", "PURPOSE", "LEGAL BASIS"],
+        rows: [
+          ["Perform security audits", "To analyze code and provide findings.", "Performance of contract"],
+          ["Email delivery", "To send you your audit report and receipt.", "Performance of contract"],
+          ["User support", "To communicate and handle your technical inquiries.", "Legitimate interests"],
+          ["Service improvement", "To refine our audit models and user experience.", "Legitimate interests"],
+          ["Security", "To prevent fraud, abuse, and maintain service availability.", "Legitimate interests"]
+        ]
+      },
+      footer: "We do not sell your personal data to third parties. For coding/learning products, like yours, user data is important. But keep it secret, as it's your repository, and it's your responsibility."
     },
     {
-      title: "3. Data Security",
-      content: "We implement industry-standard encryption and security protocols (AES-256) to protect your project metadata and report results."
+      id: "3",
+      title: "How Your Repository Data is Handled",
+      content: "When you submit a public repository for audit:",
+      bullets: [
+        "Our systems access the files covered by the audit request. We do not download or store the source code except for analysis.",
+        "File-level code content is transmitted to OpenAI's API for AI-powered analysis.",
+        "All file processing is done in memory. No code is stored on our servers.",
+        "Our server mistakenly saves the fetched file structure and the analysis on our database only for display, you must not store it on your own server. Your information is stored since that is what you ask of us.",
+        "We cannot guarantee that your data is safe since we use third party platforms like OpenAI and GitHub. Please review OpenAI and GitHub's data usage policy at: openai.com/policies and docs.github.com/en/site-policy."
+      ],
+      important: "WE STRONGLY RECOMMEND THAT YOU DO NOT SUBMIT REPOSITORIES CONTAINING UNREVOKED SECRETS, PRODUCTION CREDENTIALS, OR SENSITIVE PERSONAL DATA. IF YOUR REPOSITORY CONTAINS SECRETS, ROTATE THEM BEFORE SUBMITTING. VIBEDILIGENCE IS NOT LIABLE FOR THE CONSEQUENCES OF SECRETS THAT EXIST IN YOUR REPOSITORY."
     },
     {
-      title: "4. Third-Party Services",
-      content: "We use Paddle for payments and Supabase for database management. These partners are compliant with global privacy standards (GDPR/CCPA)."
+      id: "4",
+      title: "Third-Party Services",
+      intro: "We use the following third-party services to deliver the Service. By using VibeDiligence, you acknowledge and consent to the data processing behavior of these third-party services:",
+      table: {
+        headers: ["SERVICE", "PURPOSE", "PRIVACY POLICY"],
+        rows: [
+          ["Paddle", "Payment processing (PCI-DSS compliant) and all cards of record handled.", "paddle.com/legal"],
+          ["OpenAI", "AI models and analysis.", "openai.com/privacy"],
+          ["Supabase", "Database and authentication for your user account.", "supabase.com/privacy"],
+          ["Vercel", "Website hosting and serverless functions.", "vercel.com/legal/privacy-policy"],
+          ["Resend", "Email delivery service.", "resend.com/privacy"],
+          ["GitHub", "Repository and data access (public repositories).", "docs.github.com/en/site-policy"]
+        ]
+      },
+      footer: "VibeDiligence may use other third-party services to deliver the service. By using VibeDiligence, you acknowledge and consent to the data processing behavior of these third-party services."
     },
     {
-      title: "5. Your Rights",
-      content: "You have the right to request deletion of your data and results at any time. Reports are stored for your convenience but can be wiped upon request."
+      id: "5",
+      title: "Data Storage and Retention",
+      intro: "WORK DATA IS STORED",
+      subsections: [
+        {
+          id: "",
+          title: "",
+          content: "Audit results and metadata are stored on our Supabase-managed database in the United States. No repository file code is stored on our servers for storage."
+        }
+      ],
+      table: {
+        headers: ["WORK DATA", "RETENTION PERIOD"],
+        rows: [
+          ["Audit results/scores", "Until you ask us to delete it."],
+          ["Email address", "Until you ask us to delete it."],
+          ["GitHub handle ID", "Up to 30 days."],
+          ["Server logs", "Up to 30 days."],
+          ["Payment and account info", "Retention as needed for our legal and administrative records for years if necessary."]
+        ]
+      },
+      footer: "Should the location of the data change, we will update this policy. We reserve the right to change the location of our data storage. We assume no responsibility for data loss, errors, or hardware failure on behalf we store the information on third-party platforms."
+    },
+    {
+      id: "6",
+      title: "Security",
+      intro: "We implement appropriate technical and organisational measures to protect personal data, including:",
+      bullets: [
+        "HTTPS encryption for all data in transit (TLS 1.2 or higher)",
+        "Encryption of data at rest (AES-256 and PGP encryption if applicable)",
+        "Strict access control via IP profiling and/or session variables",
+        "Server-side only storage of API payloads and system logs",
+        "PCI-compliant payment processing via paddle.com/checkout",
+        "Rate limiting to prevent abuse"
+      ],
+      footer: "However, no system is completely secure. We cannot guarantee the absolute security of your information and the information should not be shared by you. By using VibeDiligence, you acknowledge that you use our service at your own risk and you assume all responsibility and your personal data, and we will not assume any responsibility under applicable laws."
+    },
+    {
+      id: "7",
+      title: "Cookies",
+      intro: "VibeDiligence uses minimal functional cookies only.",
+      table: {
+        headers: ["COOKIE", "PURPOSE", "TYPE"],
+        rows: [
+          ["supabase-auth-token", "Required for login sessions (if applicable).", "Session"],
+          ["paddle-session-cookie", "Required for checkout process.", "Session"]
+        ]
+      },
+      footer: "We do not use any other cookies, third-party tracking pixels, or other data gathering tools. You can disable cookies in your browser settings, though some functional parts of this site may be affected."
+    },
+    {
+      id: "8",
+      title: "Your Rights",
+      intro: "Depending on your location, you may have rights regarding your personal data. We provide the following rights:",
+      bullets: [
+        "Access — Request a copy of personal data we hold about you.",
+        "Deletion — Request deletion of your account and related info.",
+        "Portability — Request a copy of your personal data in a readable format.",
+        "Object — Request that we stop processing your personal data.",
+        "Withdrawal — Withdraw consent for data processing at any time."
+      ],
+      footer: "To exercise any right, email support@vibediligence.com with your request. Additional information for identify verification purposes (such as email or audit ID) will be required within 30 days. In some cases we may keep some of your information for legal or business reasons. Any other digital asset or record that is not personal is not covered by this policy as we retain it for historical record at point of creation for calculations."
+    },
+    {
+      id: "9",
+      title: "International Data Transfers",
+      intro: "VibeDiligence is a product of VibeDiligence Limited. Our infrastructure and service providers are predominantely based in the United States and United Kingdom. By using our service, you acknowledge and consent to your data being transferred to, stored at, and processed in these countries and other countries where our service providers operate. They may have different data protection laws than your own country and security of your data."
+    },
+    {
+      id: "10",
+      title: "Children's Privacy",
+      intro: "VibeDiligence is not directed to individuals under the age of 13. We do not knowingly collect personal information from children under the age of 13. If we learn that we have collected information from a child under 13, we will promptly delete such information.",
+      footer: "Contact us at support@vibediligence.com if you believe we have inadvertently collected such data."
+    },
+    {
+      id: "11",
+      title: "Changes to This Policy",
+      intro: "We may update this Privacy Policy from time to time. The 'Last updated' date at the top of this Privacy Policy will reflect any changes. Continued use of VibeDiligence after changes constitutes acceptance of the updated policy. We recommend that you check this policy periodically for updates. We will notify you of any material changes by posting the new policy on this page, or by sending you an email if you have provided one and you subscribe to updates. We assume no responsibility for notifying you beyond what is required by law.",
     }
   ],
   contact: {
-    title: "Contact Us",
-    description: "For any privacy-related inquiries, please email:",
-    email: "privacy@vibediligence.com"
+    title: "Contact",
+    description: "For any privacy-related inquiries, please reach out to us at:",
+    email: "support@vibediligence.com"
   }
 };
 
@@ -78,7 +230,7 @@ export const TERMS_CONTENT = {
 export const SECURITY_CONTENT = {
   eyebrow: "SECURITY — VIBEDILIGENCE",
   heading: "Security <span class='text-pink-500'>—</span> VibeDiligence",
-  subheading: "Last updated: March 2026",
+  lastUpdated: "Last updated: March 19, 2026",
   metadata: [
     { icon: "Calendar", text: "Last updated: March 2026" },
     { icon: "ShieldCheck", text: "Verified Infrastructure" }
