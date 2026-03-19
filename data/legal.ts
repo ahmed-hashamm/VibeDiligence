@@ -190,40 +190,280 @@ export const PRIVACY_CONTENT: LegalContent = {
   }
 };
 
-export const TERMS_CONTENT = {
-  eyebrow: "Legal",
-  heading: "Terms of Service",
-  subheading: "Last updated: March 18, 2024. Please read these terms carefully before starting an audit.",
+export const TERMS_CONTENT: LegalContent = {
+  eyebrow: "LEGAL INFRASTRUCTURE V1.0",
+  heading: "Terms <span class='text-pink-500'>—</span> VibeDiligence",
+  lastUpdated: "Last updated: March 2026",
+  intro: "VibeDiligence ('Service', 'we', 'us', 'our') is an AI-powered technical audit service accessible at vibediligence.com.",
+  acknowledgement: "PLEASE READ THESE TERMS CAREFULLY. BY ACCESSING OR USING VIBEDILIGENCE, OR BY CLICKING 'I AGREE', YOU AGREE TO BE LEGALLY BOUND BY THESE TERMS. IF YOU DO NOT AGREE, DO NOT USE THIS SERVICE.",
+  contactLine: "For questions about these Terms, contact us at: support@vibediligence.com",
   sections: [
     {
-      title: "1. Acceptance of Terms",
-      content: "By accessing or using VibeDiligence, you agree to be bound by these Terms of Service. If you do not agree, please do not use the service."
+      id: "1",
+      title: "What VibeDiligence Is",
+      content: "VibeDiligence provides automated, AI-generated technical review reports on public GitHub repositories. Customers submit a repository URL and receive a scored PDF report covering security patterns, production readiness indicators, code quality signals, and scalability considerations.",
+      subsections: [
+        {
+          title: "1.1 Nature of the Service",
+          content: "VibeDiligence is an automated AI-generated review tool. It is expressly NOT:",
+          bullets: [
+            "A professional security audit, penetration test, or vulnerability assessment",
+            "A certification that your application is secure, production-ready, or fit for any purpose",
+            "Legal, financial, investment, or professional advice of any kind",
+            "A guarantee of accuracy, completeness, or correctness of any finding",
+            "A substitute for a qualified security engineer, software architect, or legal professional",
+            "An exhaustive analysis of every file, dependency, or configuration in your codebase",
+            "A statement that your application complies with any regulatory, legal, or industry standard"
+          ],
+          nestedContent: "AI-generated reports may contain errors, false positives, false negatives, outdated recommendations, or inapplicable findings. The accuracy of findings depends on the code submitted, the quality of AI analysis at the time, and many factors outside our control. You acknowledge this limitation before purchasing.",
+          nestedBullets: [
+            "Reports reflect a snapshot of the submitted repository at the time of analysis.",
+            "They do not account for changes made after submission, dependencies updated after analysis, or threats that emerge after the report is generated."
+          ]
+        },
+        {
+          title: "1.2 No Reliance",
+          content: "You acknowledge that you will not rely solely on a VibeDiligence report to make security, deployment, investment, or business decisions without independent verification. VibeDiligence reports are a tool to assist — not replace — your own judgement and qualified professional advice."
+        },
+        {
+          title: "1.3 Service Availability",
+          content: "We do not guarantee that the Service will be available at any specific time, uninterrupted, error-free, or free from technical issues. We may suspend, modify, restrict, or discontinue the Service or any part of it at any time, with or without notice, for maintenance, updates, legal reasons, or any other reason. We are not liable for any loss or damage arising from service unavailability or changes to the Service."
+        }
+      ]
     },
     {
-      title: "2. Scope of Service",
-      content: "VibeDiligence provides automated technical audits. These reports are for informational purposes only and do not constitute financial or legal advice."
+      id: "2",
+      title: "Eligibility",
+      content: "By using VibeDiligence, you represent and warrant that:",
+      bullets: [
+        "You are at least 18 years of age",
+        "You have full legal capacity to enter into a binding contract",
+        "You are not prohibited from receiving or using services under applicable law",
+        "You are not located in, or acting on behalf of an entity in, a country subject to international sanctions or embargoes",
+        "If using VibeDiligence on behalf of an organisation, you have full authority to bind that organisation to these Terms"
+      ]
     },
     {
-      title: "3. User Responsibilities",
-      content: "You are responsible for ensuring you have the legal right to audit the repositories you submit. We are not liable for unauthorized project submissions."
+      id: "3",
+      title: "Your Responsibilities",
+      subsections: [
+        {
+          title: "3.1 Repository Submission",
+          content: "By submitting a GitHub repository, you represent and warrant that:",
+          bullets: [
+            "You are the legal owner of the repository, or you have obtained explicit written authorisation from the owner to submit it for analysis",
+            "The repository does not contain code, data, or intellectual property that you are prohibited from sharing with third-party AI services (including OpenAI)",
+            "You understand that submitting a repository transmits a portion of its contents to OpenAI's API for analysis, and you consent to this transmission",
+            "You have reviewed the repository for sensitive data (credentials, API keys, personal data, confidential business information) and accept full responsibility for any such content that may be transmitted as part of the audit process"
+          ]
+        },
+        {
+          title: "3.2 Acceptable Use",
+          content: "You agree not to:",
+          bullets: [
+            "Submit repositories you do not own or have authorisation to submit",
+            "Attempt to circumvent rate limits, payment requirements, or any access controls",
+            "Submit repositories for the purpose of competitive analysis of VibeDiligence's methodology",
+            "Use the Service to analyse code containing content that is illegal, harmful, or in violation of third-party rights",
+            "Attempt to manipulate, inject, or override AI instructions through code comments or repository content",
+            "Reverse-engineer, decompile, or extract proprietary methodology from the Service",
+            "Use the Service in any manner that violates applicable laws or regulations",
+            "Resell, sublicense, or offer the Service to third parties as your own product"
+          ]
+        },
+        {
+          title: "3.3 Accuracy of Information",
+          content: "You agree to provide accurate information in the audit submission form. VibeDiligence is not responsible for reduced report accuracy resulting from inaccurate stack information you provide."
+        },
+        {
+          title: "3.4 Security of Your Systems",
+          content: "Acting on, or failing to act on, findings in a VibeDiligence audit report is entirely at your own risk. You are solely responsible for the security, stability, and integrity of your own systems and applications."
+        }
+      ]
     },
     {
-      title: "4. Payments & Refunds",
-      content: "Audits are one-time purchases via Paddle. Due to the immediate delivery of digital reports, refunds are only issued for technical failures."
+      id: "4",
+      title: "Payments",
+      subsections: [
+        {
+          title: "4.1 Pricing and Changes",
+          content: "The current price for a Basic Audit report is $49 USD as a one-time payment. Prices are subject to change at any time without prior notice. The price displayed on the website at the time of purchase is the price you will be charged. No price changes will affect purchases already completed."
+        },
+        {
+          title: "4.2 Payment Processing — Paddle as Merchant of Record",
+          content: "All payments are processed by Paddle.com, which acts as the merchant of record for all transactions. This means Paddle — not VibeDiligence — is the seller of record on your payment statement. By completing a purchase, you also agree to Paddle's Terms of Service and their Privacy Policy.",
+          nestedContent: "VibeDiligence does not receive, store, or have access to your payment card details, bank information, or full payment credentials. We receive only a confirmation of successful payment and your email address from Paddle."
+        },
+        {
+          title: "4.3 Taxes",
+          content: "As merchant of record, Paddle is responsible for calculating, collecting, and remitting applicable sales taxes, VAT, GST, and similar charges in all applicable jurisdictions. Tax amounts, if any, will be displayed at checkout before you confirm payment."
+        },
+        {
+          title: "4.4 Currency and Exchange",
+          content: "All prices are quoted in US Dollars (USD). If your payment method is in a different currency, your bank or payment provider may apply a conversion rate and charge a conversion fee. VibeDiligence has no control over and is not responsible for exchange rates or fees applied by your financial institution."
+        },
+        {
+          title: "4.5 Failed Payments",
+          content: "If a payment fails after you have submitted a repository for audit, no report will be generated or delivered. VibeDiligence is not responsible for failed payments caused by your payment provider, insufficient funds, or technical issues outside our control."
+        }
+      ]
     },
     {
-      title: "5. Intellectual Property",
-      content: "You retain all rights to your code. VibeDiligence retains all rights to the audit technology, report formats, and the 'Vibe' scoring methodology."
+      id: "5",
+      title: "Refund Policy",
+      subsections: [
+        {
+          title: "5.1 Circumstances Where a Refund Will Be Issued",
+          bullets: [
+            "The audit failed entirely to generate a report due to a confirmed technical error on our side, and we are unable to deliver the report within 72 hours of the original submission",
+            "You were charged more than once for the same audit due to a billing error",
+            "You completed payment but never received your report and our support team is unable to deliver it within 5 business days"
+          ]
+        },
+        {
+          title: "5.2 Circumstances Where No Refund Will Be Issued",
+          content: "Refunds will not be provided in the following circumstances, and by purchasing you acknowledge and accept this:",
+          bullets: [
+            "You disagree with, dislike, or wish to dispute the findings, scores, or recommendations in your report — AI-generated reports are not a guarantee of any specific finding",
+            "You submitted the incorrect repository URL",
+            "You provided inaccurate stack information that affected the report's relevance",
+            "You changed your mind after the report was generated, whether or not you have downloaded it",
+            "Your repository was private or inaccessible at the time of submission (the Service only supports public repositories, as clearly stated before purchase)",
+            "The report did not identify an issue that was subsequently discovered — our reports are not exhaustive",
+            "More than 30 days have passed since the date of purchase",
+            "You found a cheaper or alternative service after purchasing",
+            "Your use of the report did not produce the business outcome you expected"
+          ]
+        },
+        {
+          title: "5.3 Refund Process",
+          content: "To request a refund under Section 5.1, email support@vibediligence.com with your purchase email address and audit ID (available in your Paddle receipt). We will respond within 5 business days. Approved refunds are issued back to the original payment method via Paddle, subject to Paddle's processing timelines (typically 5–10 business days)."
+        }
+      ]
     },
     {
-      title: "6. Limitation of Liability",
-      content: "VibeDiligence is provided 'as-is'. We are not liable for decisions made based on audit results or any indirect damages arising from service use."
+      id: "6",
+      title: "Intellectual Property",
+      subsections: [
+        {
+          title: "6.1 Our Intellectual Property",
+          content: "All elements of VibeDiligence — including but not limited to the website, software, audit methodology, scoring system, report format, branding, copy, design, and all content we create — are the exclusive intellectual property of VibeDiligence and protected by applicable copyright, trademark, and other intellectual property laws. You may not reproduce, copy, distribute, reverse-engineer, or create derivative works from our content without our express prior written consent."
+        },
+        {
+          title: "6.2 Your Audit Report",
+          content: "Upon full payment, you are granted a non-exclusive, non-transferable licence to use your purchased audit report for your own internal business purposes. You may share it with your team, investors, or developers in the context of your own project. You may not:",
+          bullets: [
+            "Resell, sublicense, or distribute audit reports as a commercial product or service",
+            "Represent an audit report as having been independently produced by a human security professional",
+            "Use audit report content to train, fine-tune, or develop competing AI systems"
+          ]
+        },
+        {
+          title: "6.3 Your Repository",
+          content: "We make no claim of ownership over any code, content, or intellectual property contained in your repository. Submitting a repository for analysis does not grant VibeDiligence any licence, ownership, or rights over your code beyond what is necessary to deliver the Service."
+        }
+      ]
+    },
+    {
+      id: "7",
+      title: "AI Disclaimer",
+      content: "VibeDiligence uses large language models (LLMs), specifically OpenAI's API, to generate audit findings. You acknowledge and accept the following:",
+      bullets: [
+        "AI-generated content can be incorrect, misleading, incomplete, or hallucinated",
+        "The same repository analysed twice may produce different results due to the probabilistic nature of AI",
+        "AI models have knowledge cutoff dates and may not be aware of newly discovered vulnerabilities or best practices",
+        "Findings described in specific technical language may not accurately reflect the actual issue in your codebase",
+        "VibeDiligence does not manually review, verify, or validate AI-generated findings before delivery",
+        "Acting on AI-generated recommendations without independent expert review is done entirely at your own risk"
+      ],
+      footer: "The AI disclaimer in this section applies to all report content and is incorporated by reference into the Disclaimer of Warranties (Section 8) and Limitation of Liability (Section 9)."
+    },
+    {
+      id: "8",
+      title: "Disclaimer of Warranties",
+      important: "TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, VIBEDILIGENCE AND ALL CONTENT, REPORTS, AND SERVICES PROVIDED THROUGH IT ARE OFFERED ON AN 'AS IS' AND 'AS AVAILABLE' BASIS, WITHOUT ANY WARRANTY OF ANY KIND, EXPRESS OR IMPLIED.",
+      content: "Without limiting the foregoing, VibeDiligence expressly disclaims:",
+      bullets: [
+        "Any implied warranty of merchantability, fitness for a particular purpose, or non-infringement",
+        "Any warranty that the Service will be uninterrupted, timely, error-free, or secure",
+        "Any warranty that audit reports are accurate, complete, current, or suitable for any specific purpose",
+        "Any warranty that implementing audit recommendations will improve the security, performance, or quality of your application",
+        "Any warranty that the Service will identify all vulnerabilities, issues, or risks present in your codebase",
+        "Any warranty regarding the suitability of the Service for regulated industries, compliance requirements, or legal obligations"
+      ],
+      footer: "Some jurisdictions do not permit the exclusion of certain implied warranties. In such jurisdictions, the above exclusions apply to the maximum extent permitted by law."
+    },
+    {
+      id: "9",
+      title: "Limitation of Liability",
+      important: "TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL VIBEDILIGENCE BE LIABLE FOR:",
+      bullets: [
+        "Any indirect, incidental, special, consequential, exemplary, or punitive damages of any kind",
+        "Loss of profits, revenue, business, contracts, data, goodwill, or anticipated savings",
+        "Security breaches, data loss, system failures, downtime, or damages to your application or infrastructure — whether or not a VibeDiligence report identified, failed to identify, or made recommendations related to the issue",
+        "Any loss or damage arising from your reliance on or use of AI-generated report content",
+        "Any decision, action, or omission made on the basis of a VibeDiligence report",
+        "Any third-party claims arising from the content of your repository or your use of the Service",
+        "Any loss arising from your failure to independently verify audit findings with qualified professionals"
+      ],
+      footer: "IN ALL CASES, VIBEDILIGENCE'S TOTAL CUMULATIVE LIABILITY TO YOU ARISING OUT OF OR RELATED TO THESE TERMS OR YOUR USE OF THE SERVICE SHALL NOT EXCEED THE AMOUNT YOU ACTUALLY PAID FOR THE SPECIFIC AUDIT REPORT GIVING RISE TO THE CLAIM."
+    },
+    {
+      id: "10",
+      title: "Indemnification",
+      content: "You agree to defend, indemnify, and hold harmless VibeDiligence from and against any and all claims, damages, losses, liabilities, costs, and expenses (including reasonable legal fees) arising out of or relating to:",
+      bullets: [
+        "Your use or misuse of the Service",
+        "Your breach of any provision of these Terms",
+        "Your violation of any applicable law or regulation",
+        "Your violation of any third-party rights, including intellectual property rights or privacy rights",
+        "Any content, code, or data contained in repositories you submit for analysis",
+        "Any claim by a third party arising from actions you took or failed to take based on a VibeDiligence audit report"
+      ]
+    }
+  ],
+  faqs: [
+    {
+      question: "11. Third-Party Services",
+      answer: "VibeDiligence integrates with third-party services including Paddle, OpenAI, Supabase, Vercel, GitHub, and Resend. These services are independent of VibeDiligence and are governed by their own terms and policies. We are not responsible for the availability, accuracy, or reliability of any third-party service; any changes, outages, or data handling practices of third-party providers; any terms, pricing, or policies imposed by third-party services; or losses arising from third-party service failures that affect our ability to deliver the Service."
+    },
+    {
+      question: "12. Force Majeure",
+      answer: "VibeDiligence shall not be liable for any failure or delay in performing our obligations under these Terms caused by circumstances beyond our reasonable control, including but not limited to: natural disasters, acts of government, war, terrorism, civil unrest, power failures, internet outages, cyberattacks, third-party service outages (including OpenAI, GitHub, Supabase, Vercel, or Paddle), pandemics, or any other event of force majeure."
+    },
+    {
+      question: "13. Termination and Suspension",
+      answer: "We reserve the right to suspend or permanently terminate your access to VibeDiligence at any time, immediately and without notice, at our sole discretion, if we reasonably believe: You have breached any provision of these Terms; You are engaging in fraudulent, abusive, or harmful behaviour; Your use of the Service poses a risk to other users or our systems; or We are required to do so by applicable law or legal process."
+    },
+    {
+      question: "14. Changes to These Terms",
+      answer: "We reserve the right to modify these Terms at any time. The updated Terms will be posted on this page with a revised 'Last updated' date. Your continued use of VibeDiligence after any modification constitutes your acceptance of the revised Terms. For material changes, we will make reasonable efforts to provide advance notice by posting a notice on our website."
+    },
+    {
+      question: "15. Governing Law and Disputes",
+      answer: "These Terms are governed by and construed in accordance with internationally recognised principles of contract law. Before initiating formal legal proceedings, you agree to contact us and attempt to resolve any dispute through good-faith negotiation. We commit to making reasonable efforts to address your concern within 14 business days."
+    },
+    {
+      question: "16. Severability",
+      answer: "If any provision of these Terms is found to be invalid, unenforceable, or contrary to applicable law, that provision shall be modified to the minimum extent necessary to make it enforceable. If modification is not possible, the provision shall be severed. The remaining provisions of these Terms shall remain in full force and effect."
+    },
+    {
+      question: "17. No Waiver",
+      answer: "Our failure to enforce any right or provision of these Terms shall not constitute a waiver of that right or provision. Any waiver of a specific breach shall not constitute a waiver of any subsequent breach of the same or any other provision."
+    },
+    {
+      question: "18. Entire Agreement",
+      answer: "These Terms, together with our Privacy Policy, constitute the entire and exclusive agreement between you and VibeDiligence with respect to your use of the Service. They supersede all prior agreements, communications, and understandings — whether written or oral — relating to the subject matter herein."
+    },
+    {
+      question: "19. Contact",
+      answer: "For questions about these Terms: Email support@vibediligence.com. Response time: We aim to respond within 10 business days. Language of communication: English."
     }
   ],
   contact: {
     title: "Legal Contact",
     description: "Questions regarding these terms? contact:",
-    email: "legal@vibediligence.com"
+    email: "support@vibediligence.com"
   }
 };
 
@@ -350,5 +590,10 @@ export const SECURITY_CONTENT = {
     email: "support@vibediligence.com",
     subject: "[SECURITY] Brief description of the issue",
     thankYou: "We appreciate the security research community and will handle all reports professionally and confidentially."
+  },
+  contact: {
+    title: "Security Contact",
+    description: "Questions regarding our security infrastructure? contact:",
+    email: "support@vibediligence.com"
   }
 };

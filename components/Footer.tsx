@@ -39,8 +39,8 @@ export default function Footer() {
               <ul className="space-y-4">
                 {column.links.map((link) => (
                   <li key={link.label}>
-                    <Link 
-                      href={link.href} 
+                    <Link
+                      href={link.href}
                       className="text-sm text-muted hover:text-pink-500 transition-colors"
                     >
                       {link.label}
@@ -56,7 +56,7 @@ export default function Footer() {
           <p className="text-xs font-mono text-muted">
             © {new Date().getFullYear()} VibeDiligence. All rights reserved.
           </p>
-          
+
           <div className="flex items-center gap-6">
             <a href="https://twitter.com" className="text-muted hover:text-pink-500 transition-colors" target="_blank" rel="noopener noreferrer">
               <Twitter size={18} />
@@ -70,7 +70,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      
+
       {/* Decorative Bottom Glow */}
       <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-pink-500/5 blur-[100px] rounded-full pointer-events-none" />
     </footer>

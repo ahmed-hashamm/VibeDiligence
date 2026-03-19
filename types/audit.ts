@@ -44,11 +44,59 @@ export type LegalContent = {
   acknowledgement?: string;
   contactLine?: string;
   sections: LegalSection[];
+  faqs?: { question: string; answer: string }[];
   contact: {
     title: string;
     description: string;
     email: string;
   };
+};
+
+export type Metric = { 
+  label: string; 
+  score: number; 
+  status: string; 
+  color: string; 
+};
+
+export type Finding = {
+  title: string;
+  desc: string;
+  priority: string;
+  icon: string;
+  variant: 'success' | 'pink';
+};
+
+export type ReportData = {
+  id: string;
+  repo: string;
+  date: string;
+  version: string;
+  global_score: number;
+  verdict: string;
+  verdict_desc: string;
+  metrics: Metric[];
+  findings: Finding[];
+};
+
+export type SecurityPillar = {
+  title: string;
+  icon: string;
+  description?: string;
+  intro?: string;
+  sections?: { label: string; desc: string }[];
+  features?: { label: string; desc: string }[];
+  contact?: { email: string; subject: string };
+  includeInReport?: string[];
+  whatToExpect?: string[];
+  commitment?: string;
+  footerNote?: string;
+  outOfScope?: string;
+  encryptionTransit?: string;
+  encryptionRest?: string;
+  repositoryData?: { intro: string; practices: string[] };
+  caution?: string;
+  practices?: string[];
 };
 
 /**

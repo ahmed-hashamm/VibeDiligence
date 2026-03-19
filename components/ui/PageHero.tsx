@@ -3,6 +3,8 @@
  * @description A reusable high-fidelity hero section for sub-pages (Security, Privacy, etc.).
  */
 
+import StatusEyebrow from "./StatusEyebrow";
+
 /**
  * PageHeroProps interface.
  */
@@ -21,9 +23,7 @@ export default function PageHero({ eyebrow, heading, subheading, lastUpdated }: 
   return (
     <div className="mb-24">
       {/* Eyebrow Pill */}
-      <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-pink-500/10 border border-pink-500/20 text-pink-500 text-[10px] font-mono font-bold tracking-[0.2em] uppercase mb-10">
-        {eyebrow}
-      </div>
+      <StatusEyebrow text={eyebrow} className="mb-10" />
 
       {/* Main Heading */}
       <h1

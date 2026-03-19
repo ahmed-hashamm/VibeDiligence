@@ -3,25 +3,30 @@
  * @description The terms of service page.
  */
 
-import { SectionHeader } from "@/components/ui/SectionHeader";
-import GridBackground from "@/animations/svgs/GridBackground";
+import { PRIVACY_CONTENT, TERMS_CONTENT } from "@/data/legal";
+import PageHero from "@/components/ui/PageHero";
 import TermsContent from "@/components/TermsContent";
-import { TERMS_CONTENT } from "@/data/legal";
+import GridBackground from "@/animations/svgs/GridBackground";
+import FaqSection from "@/components/landing/FaqSection";
 
 /**
  * TermsPage component.
- * Pure page entry point.
+ * Features a high-fidelity design matching the Security and Privacy pages.
  */
 export default function TermsPage() {
   return (
-    <main className="min-h-screen pt-32 pb-20 bg-bg relative overflow-hidden">
+    <main className="min-h-screen pt-40 pb-32 bg-bg relative hero-bg">
       <GridBackground />
-      <div className="container mx-auto px-6 relative z-10 max-w-4xl">
-        <SectionHeader
+      
+      <div className="container mx-auto px-12 relative z-10 max-w-[1400px]">
+        {/* Page Hero */}
+        <PageHero
           eyebrow={TERMS_CONTENT.eyebrow}
           heading={TERMS_CONTENT.heading}
-          subheading={TERMS_CONTENT.subheading}
+          lastUpdated={TERMS_CONTENT.lastUpdated}
         />
+
+        {/* Core Content */}
         <TermsContent />
       </div>
     </main>

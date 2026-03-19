@@ -10,6 +10,8 @@ import HeroVisual from "@/animations/svgs/HeroVisual";
 import GridBackground from "@/animations/svgs/GridBackground";
 import { HERO_CONTENT } from "@/data/landing";
 
+import StatusEyebrow from "@/components/ui/StatusEyebrow";
+
 /**
  * HeroSection component.
  * Rule: No internal logic or hardcoded data.
@@ -21,10 +23,7 @@ export default function HeroSection() {
 
       <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div className="flex flex-col items-start text-left z-10">
-          <div className="hero-badge mb-6">
-            <span className="badge-dot" />
-            {HERO_CONTENT.badge}
-          </div>
+          <StatusEyebrow text={HERO_CONTENT.badge} className="mb-6" />
 
           <h1 className="text-5xl md:text-8xl font-bold font-sans leading-[1.0] mb-8 tracking-tighter">
             {HERO_CONTENT.title_part1} <br />

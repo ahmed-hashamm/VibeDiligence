@@ -8,9 +8,15 @@ import { cn } from "@/lib/utils";
 /**
  * SectionHeaderProps interface.
  */
+import StatusEyebrow from "./StatusEyebrow";
+
+/**
+ * SectionHeaderProps interface.
+ */
 interface SectionHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   eyebrow?: string;
   heading: string;
+  subheading?: string;
   lastUpdated?: string;
   center?: boolean;
 }
@@ -22,14 +28,16 @@ interface SectionHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
 export const SectionHeader = ({
   eyebrow,
   heading,
+  subheading,
   lastUpdated,
   center = true,
   className,
 }: SectionHeaderProps) => {
   return (
     <div className={cn("mb-12 max-w-2xl", center && "mx-auto text-center", className)}>
-      {eyebrow && <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-pink-500/10 border border-pink-500/20 text-pink-500 text-sm font-mono font-bold tracking-[0.2em] uppercase mb-10">{eyebrow}</span>}
+      {eyebrow && <StatusEyebrow text={eyebrow} className="mb-10 mx-auto" />}
       <h2 className="section-heading mb-6" dangerouslySetInnerHTML={{ __html: heading }} />
+      {subheading && <p className="section-subheading mb-4">{subheading}</p>}
       {lastUpdated && <p className="section-subheading">{lastUpdated}</p>}
     </div>
   );

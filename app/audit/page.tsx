@@ -14,7 +14,7 @@ import GridBackground from "@/animations/svgs/GridBackground";
  */
 export default function AuditPage() {
   return (
-    <main className="min-h-screen pt-32 pb-20 bg-bg relative overflow-hidden">
+    <main className="min-h-screen pt-32 pb-20 bg-bg relative overflow-hidden hero-bg">
       <GridBackground />
       
       <div className="container mx-auto px-6 relative z-10">
@@ -27,8 +27,6 @@ export default function AuditPage() {
         <AuditForm />
       </div>
 
-      {/* Background decoration decorative bloom */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-500/5 blur-[120px] rounded-full pointer-events-none" />
     </main>
   );
 }

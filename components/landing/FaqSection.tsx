@@ -11,20 +11,29 @@ import { cn } from "@/lib/utils";
  * Features an interactive accordion for common questions.
  * Matches the design exactly: Dark cards, pink icons, and smooth transitions.
  */
-export default function FaqSection() {
+export default function FaqSection({ 
+  customFaqs, 
+  customHeading 
+}: { 
+  customFaqs?: { question: string; answer: string }[],
+  customHeading?: string 
+}) {
+  const displayFaqs = customFaqs || FAQS;
+  const heading = customHeading || "Frequently Asked Questions";
+
   return (
     <section id="faq" className="w-full py-24 md:py-32 bg-bg relative overflow-hidden">
       <div className="container mx-auto px-6 max-w-4xl">
         {/* Header */}
         <div className="text-center mb-20">
           <h2 className="text-3xl md:text-5xl font-bold text-primary tracking-tight">
-            Frequently Asked Questions
+            {heading}
           </h2>
         </div>
 
         {/* Accordion List */}
         <div className="space-y-4">
-          {FAQS.map((faq, index) => (
+          {displayFaqs.map((faq, index) => (
             <FaqItem key={index} faq={faq} />
           ))}
         </div>

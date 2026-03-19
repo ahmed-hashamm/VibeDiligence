@@ -10,7 +10,7 @@ import PageHero from "@/components/ui/PageHero";
  */
 export default function SecurityPage() {
   return (
-    <main className="min-h-screen pt-40 pb-20 bg-bg relative overflow-hidden">
+    <main className="min-h-screen pt-40 pb-20 bg-bg relative overflow-hidden hero-bg">
       <GridBackground />
       <div className="max-w-[1400px] mx-auto px-12 relative z-10">
         {/* Institutional Hero */}

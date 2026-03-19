@@ -7,6 +7,7 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
 import { NAV_LINKS } from "@/data/navigation";
@@ -26,6 +27,9 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+
   return (
     <header
       className={cn(
@@ -40,18 +44,20 @@ export default function Navbar() {
           </span>
         </Link>
 
-        {/* Center Nav */}
-        <nav className="hidden md:flex items-center gap-10">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              className="text-xs font-light uppercase tracking-widest text-secondary hover:text-pink-500 transition-colors"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
+        {/* Center Nav - Only visible on Home to avoid broken anchor links */}
+        {isHome && (
+          <nav className="hidden md:flex items-center gap-10">
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                className="text-xs font-light uppercase tracking-widest text-secondary hover:text-pink-500 transition-colors"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+        )}
 
         {/* Right Action */}
         <div className="flex items-center gap-4">

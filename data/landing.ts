@@ -207,30 +207,54 @@ export const CTA_CONTENT = {
 };
 
 export const EXAMPLE_REPORT_DATA = {
+  id: "AUDIT_LOG_0X44",
   repo: "facebook/react",
-  date: "March 15, 2024",
+  date: "24 OCT 2024",
   version: "18.2.0",
   global_score: 94,
   verdict: "Ready to Scale",
-  verdict_desc: "Institutional-grade maturity. This codebase represents the gold standard for performance and scalability.",
+  verdict_desc: "Architecture exhibits elite-tier modularity. Minimal technical debt identified in core reconciliation engine. Ready for hyper-scale deployment.",
   metrics: [
-    { label: "Security", score: 98, status: "0 Critical, 0 High vulnerabilities detected.", color: "success" },
-    { label: "Scalability", score: 82, status: "Potential bottlenecks in concurrent state updates.", color: "warning" },
-    { label: "Code Quality", score: 91, status: "Strict typing and consistent architectural patterns.", color: "success" },
-    { label: "Readiness", score: 100, status: "CI/CD pipelines and testing coverage at max capacity.", color: "success" },
+    { label: "Security", score: 98, status: "MINIMAL VULNERABILITIES DETECTED", color: "success" },
+    { label: "Scalability", score: 91, status: "OPTIMAL CONCURRENT RENDERING", color: "success" },
+    { label: "Code Quality", score: 82, status: "COMPLEX LOGIC IN LEGACY HOOKS", color: "warning" },
+    { label: "Readiness", score: 95, status: "PRODUCTION ENVIRONMENT READY", color: "success" },
   ],
   findings: [
     {
       title: "Virtual DOM Optimization",
-      desc: "Reconciliation algorithms are highly optimized for leaf-node updates.",
+      desc: "Refactor deep nesting in fiber nodes to reduce reconciliation cycles by 12%.",
       priority: "LOW PRIORITY",
-      variant: "success" as const, // For Badge
+      variant: "success" as const,
+      icon: "check",
     },
     {
       title: "State Management Bottleneck",
-      desc: "High frequency updates in deep trees could benefit from transition signals.",
+      desc: "Context providers at root causing excessive re-renders in leaf components.",
       priority: "MEDIUM PRIORITY",
-      variant: "warning" as const, // For Badge
+      variant: "pink" as const,
+      icon: "dots",
+    },
+    {
+      title: "Hydration Error Logging",
+      desc: "Improve descriptive warnings during SSR hydration mismatches in dev mode.",
+      priority: "LOW PRIORITY",
+      variant: "success" as const,
+      icon: "check",
+    },
+    {
+      title: "Tree Shaking Efficiency",
+      desc: "Dead code detected in experimental concurrent builds. Pruning recommended.",
+      priority: "MEDIUM PRIORITY",
+      variant: "pink" as const,
+      icon: "alert",
+    },
+    {
+      title: "Legacy Hook Deprecation",
+      desc: "Finalize migration path for deprecated lifecycle methods in core tests.",
+      priority: "LOW PRIORITY",
+      variant: "success" as const,
+      icon: "check",
     },
   ]
 };
