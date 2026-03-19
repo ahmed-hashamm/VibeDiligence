@@ -1,41 +1,43 @@
 /**
  * @file form-options.ts
  * @description Standardized options for the audit intake form.
+ * Values must match the Zod enum allowlists in lib/validation.ts exactly.
  */
 
 export const FRAMEWORK_OPTIONS = [
-  "Next.js / React",
-  "Vue / Nuxt",
-  "Node.js / Express",
-  "Python / Django",
-  "Rust / Actix",
-  "Go / Fiber",
-];
-
-export const DATABASE_OPTIONS = [
-  "PostgreSQL",
-  "MongoDB",
-  "Redis",
-  "MySQL",
-  "DynamoDB",
-  "Supabase (Postgres)",
-  "PlanetScale (MySQL)",
-];
+  "Next.js",
+  "Remix",
+  "SvelteKit",
+  "React + Vite",
+  "Vue",
+  "Other",
+] as const;
 
 export const AUTH_OPTIONS = [
-  "Clerk",
   "Supabase Auth",
-  "Auth.js / NextAuth",
   "Firebase Auth",
-  "Kinde",
-  "Custom / None",
-];
+  "NextAuth",
+  "Clerk",
+  "Auth.js",
+  "None",
+  "Other",
+] as const;
+
+export const DATABASE_OPTIONS = [
+  "Supabase",
+  "Firebase",
+  "PlanetScale",
+  "MongoDB",
+  "PostgreSQL",
+  "None",
+  "Other",
+] as const;
 
 export const DEPLOYMENT_OPTIONS = [
   "Vercel",
-  "Railway",
-  "AWS / GCP",
-  "DigitalOcean",
   "Netlify",
-  "Docker / Kubernetes",
-];
+  "Railway",
+  "Render",
+  "AWS",
+  "Not deployed yet",
+] as const;

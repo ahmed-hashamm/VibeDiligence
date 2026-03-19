@@ -21,7 +21,7 @@ export default function HeroSection() {
     <section className="relative w-full pt-32 pb-20 md:pt-28 md:pb-32 overflow-hidden hero-bg">
       <GridBackground />
 
-      <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className="container  px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div className="flex flex-col items-start text-left z-10">
           <StatusEyebrow text={HERO_CONTENT.badge} className="mb-6" />
 

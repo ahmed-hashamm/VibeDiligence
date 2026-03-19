@@ -1,18 +1,24 @@
 /**
  * @file ResultsContent.tsx
- * @description Assembler for the audit results page content.
+ * @description Assembler for the audit results page content (paywall state).
+ * Displays teaser scores and a paywall overlay with Paddle checkout link.
  */
 
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import ResultsTeaser from "./ResultsTeaser";
 import PaywallOverlay from "./PaywallOverlay";
 import { ShieldIcon } from "lucide-react";
+import type { AuditRow } from "@/types/audit";
+
+interface ResultsContentProps {
+  audit: AuditRow;
+}
 
 /**
  * ResultsContent component.
- * Combines teaser content, the paywall overlay, and support contact.
+ * Combines teaser content with real audit scores and the paywall overlay.
  */
-export default function ResultsContent() {
+export default function ResultsContent({ audit }: ResultsContentProps) {
   return (
     <div className="container mx-auto px-6 relative z-10">
       <SectionHeader
@@ -22,8 +28,8 @@ export default function ResultsContent() {
       />
 
       <div className="max-w-5xl mx-auto relative">
-        <ResultsTeaser />
-        <PaywallOverlay />
+        <ResultsTeaser audit={audit} />
+        <PaywallOverlay auditId={audit.id} repoUrl={audit.repo_url} />
       </div>
 
       <div className="mt-20 text-center">
