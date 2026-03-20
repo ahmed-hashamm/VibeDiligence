@@ -403,27 +403,40 @@ function buildEmailHtml(audit: AuditRow, appUrl: string): string {
 
 // ─── Email sender ─────────────────────────────────────────────────────────
 
+/**
+ * Sends the audit report email via Resend.
+ * Optionally includes the PDF attachment if provided.
+ */
 async function sendReportEmail(
   email: string,
   audit: AuditRow,
-  pdfBuffer: Buffer,
+  pdfBuffer?: Buffer,
 ): Promise<void> {
   const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://vibediligence.tech';
   const repoName = audit.repo_url.replace('https://github.com/', '').replace(/\//g, '-');
+  const hasAttachment = !!(pdfBuffer && pdfBuffer.length > 0);
+
+  console.log(`[Paddle Webhook] Preparing email for ${email} (Attachment: ${hasAttachment})`);
 
   try {
-    await getResend().emails.send({
+    const { data, error } = await getResend().emails.send({
       from: 'VibeDiligence <audit@vibediligence.tech>',
       to: email,
       subject: `Your VibeDiligence Audit is Ready — Score: ${audit.scores.overall_score}/100`,
       html: buildEmailHtml(audit, appUrl),
-      attachments: [
+      attachments: hasAttachment ? [
         {
           filename: `vibed-audit-${repoName}.pdf`,
-          content: pdfBuffer,
+          content: pdfBuffer!,
         },
-      ],
+      ] : undefined,
     });
+
+    if (error) {
+      console.error('[Paddle Webhook] Resend error:', error);
+    } else {
+      console.log(`[Paddle Webhook] Email sent successfully: ${data?.id}`);
+    }
   } catch (err) {
     console.error('[Paddle Webhook] Failed to send email:', err);
   }
@@ -432,28 +445,37 @@ async function sendReportEmail(
 // ─── Route handler ────────────────────────────────────────────────────────
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
+  console.log('[Paddle Webhook] START PROCESSING');
+
   // 1. Read raw body FIRST — stream is consumed after first read
   const rawBody = await req.text();
 
   // 2. Verify signature
   const signature = req.headers.get('paddle-signature');
   if (!signature) {
+    console.error('[Paddle Webhook] Missing signature header');
     return NextResponse.json({ error: 'Missing signature' }, { status: 401 });
   }
+
   if (!verifyPaddleSignature(rawBody, signature)) {
+    console.error('[Paddle Webhook] Signature verification failed');
     return NextResponse.json({ error: 'Invalid signature' }, { status: 401 });
   }
+  console.log('[Paddle Webhook] Signature verified');
 
   // 3. Parse JSON
   let event: Record<string, unknown>;
   try {
     event = JSON.parse(rawBody) as Record<string, unknown>;
   } catch {
+    console.error('[Paddle Webhook] JSON parse failed');
     return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
   }
 
   // 4. Only handle transaction.completed
   const eventType = event.event_type as string | undefined;
+  console.log(`[Paddle Webhook] Event Type: ${eventType}`);
+
   if (eventType !== 'transaction.completed') {
     return NextResponse.json({ received: true }, { status: 200 });
   }
@@ -463,12 +485,16 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   const customData = data?.custom_data as Record<string, unknown> | undefined;
   const auditId = customData?.audit_id as string | undefined;
 
+  console.log(`[Paddle Webhook] Audit ID: ${auditId}`);
+
   if (!auditId || !isValidUUID(auditId)) {
+    console.error('[Paddle Webhook] Invalid or missing Audit ID');
     return NextResponse.json({ error: 'Invalid audit ID' }, { status: 400 });
   }
 
   // 6. Extract email
   const email = (data?.customer as Record<string, unknown> | undefined)?.email as string | undefined;
+  console.log(`[Paddle Webhook] Target Email: ${email}`);
 
   // 7. Idempotency check
   const { data: existing } = await supabaseAdmin
@@ -478,31 +504,51 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     .single();
 
   if (existing?.paid === true) {
+    console.log('[Paddle Webhook] Already paid, skipping');
     return NextResponse.json({ received: true, already_paid: true }, { status: 200 });
   }
 
+  if (!existing) {
+    console.error(`[Paddle Webhook] Audit record ${auditId} not found`);
+    return NextResponse.json({ error: 'Audit not found' }, { status: 404 });
+  }
+
   // 8. Update Supabase: paid=true, save email
+  console.log('[Paddle Webhook] Updating Supabase state...');
   const { error: updateError } = await supabaseAdmin
     .from('audits')
     .update({ paid: true, email: email ?? null })
     .eq('id', auditId);
 
   if (updateError) {
-    console.error('[POST /api/webhooks/paddle] Supabase update error');
+    console.error('[Paddle Webhook] Database update error:', updateError);
     return NextResponse.json({ error: 'Database update failed' }, { status: 500 });
   }
+  console.log('[Paddle Webhook] Database updated to PAID');
 
-  // 9. Generate PDF and send email
+  // 9. PDF Generation (with 5s Timeout) and Email Delivery
   if (email && existing) {
     const auditData = { ...existing, paid: true, email: email ?? null } as AuditRow;
+    let pdfBuffer: Buffer | undefined;
 
     try {
-      const pdfBuffer = await generatePdfBuffer(auditData);
-      await sendReportEmail(email, auditData, pdfBuffer);
+      console.log('[Paddle Webhook] Attempting PDF generation (5s timeout)...');
+      // We race the generation vs a 5s timeout to avoid function killing
+      pdfBuffer = await Promise.race([
+        generatePdfBuffer(auditData),
+        new Promise<undefined>((_, reject) =>
+          setTimeout(() => reject(new Error('PDF_TIMEOUT')), 5000)
+        ),
+      ]);
+      console.log(`[Paddle Webhook] PDF generated successfully (${pdfBuffer?.length} bytes)`);
     } catch (err) {
-      // Email failure is non-fatal — payment is already recorded
-      console.error('[Paddle Webhook] PDF generation or email send failed:', err);
+      console.warn('[Paddle Webhook] PDF generation failed or timed out. Sending link-only email.', err);
+      // pdfBuffer remains undefined
     }
+
+    // Always send the single email (with or without PDF)
+    await sendReportEmail(email, auditData, pdfBuffer);
+    console.log(`[Paddle Webhook] Webhook processing complete for ${auditId}`);
   }
 
   // 10. Always return 200 for valid, processed events
