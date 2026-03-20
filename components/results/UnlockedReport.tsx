@@ -107,9 +107,10 @@ export default function UnlockedReport({ audit }: UnlockedReportProps) {
 
       {/* Header with score + PDF download */}
       <ScrollReveal delay={0.2}>
-        <div className="max-w-5xl mx-auto mb-10 rounded-sm  border-l-2 border-pink-500/20">
-          <Card className="p-8 md:p-12">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+        <div className="max-w-5xl mx-auto mb-10">
+          <Card className="p-8 md:p-12 border-white/5 bg-surface/20 rounded-sm relative overflow-hidden group">
+            <div className="absolute top-0 left-0 w-1.5 h-full bg-pink-500/80" />
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 relative z-10">
               <div className="space-y-4">
                 <h2 className="text-3xl font-bold">{repoName}</h2>
                 <div className="flex items-center gap-4">
@@ -158,10 +159,13 @@ export default function UnlockedReport({ audit }: UnlockedReportProps) {
       {/* Executive Summary */}
       {scores.executive_summary && (
         <ScrollReveal delay={0.25}>
-          <div className="max-w-5xl mx-auto mb-10 rounded-sm border-l-2 border-pink-500/20">
-            <Card className="p-8">
-              <p className="text-xs font-mono text-muted uppercase tracking-widest mb-4">Executive Summary</p>
-              <p className="text-secondary/80 leading-relaxed">{scores.executive_summary}</p>
+          <div className="max-w-5xl mx-auto mb-10">
+            <Card className="p-8 border-white/5 bg-surface/20 rounded-sm relative overflow-hidden group">
+              <div className="absolute top-0 left-0 w-1.5 h-full bg-pink-500/80" />
+              <div className="relative z-10">
+                <p className="text-xs font-mono text-muted uppercase tracking-widest mb-4">Executive Summary</p>
+                <p className="text-secondary/80 leading-relaxed">{scores.executive_summary}</p>
+              </div>
             </Card>
           </div>
         </ScrollReveal>
