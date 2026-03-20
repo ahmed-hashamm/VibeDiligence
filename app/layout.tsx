@@ -50,7 +50,7 @@ export default function RootLayout({
         {children}
         <Footer />
 
-        {/* Paddle.js SDK — loaded before checkout can be triggered */}
+        {/* Paddle.js SDK */}
         <Script
           src="https://cdn.paddle.com/paddle/v2/paddle.js"
           strategy="afterInteractive"
@@ -61,10 +61,15 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
               (function initPaddle() {
-                if (typeof Paddle !== 'undefined' && Paddle.Initialize) {
+                if (typeof Paddle !== 'undefined' && Paddle.Environment && Paddle.Initialize) {
+                  Paddle.Environment.set("sandbox");
                   Paddle.Initialize({
                     token: "${process.env.NEXT_PUBLIC_PADDLE_CLIENT_TOKEN || ''}",
-                    environment: "sandbox",
+                    eventCallback: function(event) {
+                      if (event.name === "checkout.completed") {
+                        setTimeout(function() { window.location.reload(); }, 2000);
+                      }
+                    }
                   });
                 } else {
                   setTimeout(initPaddle, 200);
