@@ -12,7 +12,7 @@ import { createClient } from '@supabase/supabase-js';
  * NEVER import this in client components.
  */
 export const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!,
+  process.env.NEXT_PUBLIC_SUPABASE_URL || 'http://placeholder-build-url.com',
+  process.env.SUPABASE_SERVICE_ROLE_KEY || 'placeholder-build-key',
   { auth: { persistSession: false } }
 );

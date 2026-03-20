@@ -12,7 +12,9 @@ import { isValidUUID } from '@/lib/validation';
 import { supabaseAdmin } from '@/lib/supabase';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+export const dynamic = 'force-dynamic';
+
+const getResend = () => new Resend(process.env.RESEND_API_KEY);
 
 /**
  * Verifies the Paddle webhook signature using HMAC-SHA256 with timing-safe comparison.
@@ -42,7 +44,7 @@ async function sendReportEmail(email: string, auditId: string, repoUrl: string):
   const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://vibediligence.com';
 
   try {
-    await resend.emails.send({
+    await getResend().emails.send({
       from: 'VibeDiligence <audit@vibediligence.com>',
       to: email,
       subject: 'Your VibeDiligence Audit Report is Ready',

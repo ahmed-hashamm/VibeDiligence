@@ -20,6 +20,8 @@ const MAX_BODY_SIZE = 10_000;
 const RATE_LIMIT = 5;
 const RATE_WINDOW_MS = 60 * 60 * 1000; // 1 hour
 
+export const dynamic = 'force-dynamic';
+
 export const POST = withErrorHandling(async (req: NextRequest) => {
   // 1. Rate limit
   const ip = getClientIp(req);

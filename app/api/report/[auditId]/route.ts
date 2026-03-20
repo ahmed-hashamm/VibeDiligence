@@ -16,6 +16,8 @@ import type { AuditRow } from '@/types/audit';
 const RATE_LIMIT = 30;
 const RATE_WINDOW_MS = 60 * 60 * 1000;
 
+export const dynamic = 'force-dynamic';
+
 export const GET = withErrorHandling(async (
   req: NextRequest,
   ctx: unknown
