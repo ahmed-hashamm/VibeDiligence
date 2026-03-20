@@ -15,17 +15,17 @@ import { cn } from "@/lib/utils";
  */
 export default function ProblemSection() {
   return (
-    <section id="problem" className="w-full py-16 md:py-24 bg-bg relative overflow-hidden">
+    <section id="problem" className="w-full py-12 md:py-20 bg-bg relative overflow-hidden">
       <div className=" mx-auto px-12 relative z-10">
         {/* Centered Heading */}
-        <div className="text-center mb-20">
+        <div className="text-center mb-10">
           <h2
-            className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1]"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]"
             dangerouslySetInnerHTML={{ __html: PROBLEM_CONTENT.heading }}
           />
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
           {/* Left Column: Alerts/Incidents */}
           <div className="space-y-6">
             {PROBLEM_CONTENT.incidents.map((incident) => {

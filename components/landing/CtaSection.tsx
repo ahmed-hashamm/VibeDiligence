@@ -13,13 +13,13 @@ import { CTA_CONTENT } from "@/data/landing";
  */
 export default function CtaSection() {
   return (
-    <section className="w-full py-24 md:py-40 bg-bg relative overflow-hidden text-center flex flex-col items-center justify-center">
+    <section className="w-full py-16 md:py-28 bg-bg relative overflow-hidden text-center flex flex-col items-center justify-center">
       {/* Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[600px] bg-pink-500/10 blur-[150px] pointer-events-none rounded-full" />
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto flex flex-col items-center">
-          <h2 className="text-4xl md:text-6xl font-bold mb-8 leading-[1.1] tracking-tight text-white drop-shadow-sm">
+          <h2 className="text-3xl md:text-5xl font-bold mb-8 leading-[1.1] tracking-tight text-white drop-shadow-sm">
             {CTA_CONTENT.heading}
           </h2>
           <p className="text-base md:text-lg text-secondary/70 mb-12 max-w-2xl mx-auto font-medium">

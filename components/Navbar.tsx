@@ -51,7 +51,7 @@ export default function Navbar() {
               <Link
                 key={link.label}
                 href={link.href}
-                className="text-xs font-light uppercase tracking-widest text-secondary hover:text-pink-500 transition-colors"
+                className="text-[10px] font-light uppercase tracking-widest text-secondary hover:text-pink-500 transition-colors"
               >
                 {link.label}
               </Link>
@@ -62,7 +62,7 @@ export default function Navbar() {
         {/* Right Action */}
         <div className="flex items-center gap-4">
           <Link href="/audit">
-            <Button className="px-6 py-2.5 h-auto text-[10px] tracking-[0.2em] font-bold uppercase rounded-sm shadow-[0_0_15px_rgba(255,46,109,0.3)]">
+            <Button className="px-6 py-2.5 h-auto text-[8px] tracking-[0.2em] font-bold uppercase rounded-sm shadow-[0_0_15px_rgba(255,46,109,0.3)]">
               Analyze Now
             </Button>
           </Link>

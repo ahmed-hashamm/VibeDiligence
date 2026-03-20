@@ -6,6 +6,7 @@
 
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -20,10 +21,14 @@ const jetbrains = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono-va
 export const metadata: Metadata = {
   title: "VibeDiligence — Premium GitHub Repo Audits",
   description: "Advanced repo auditing for technical due diligence. Get instant security, scalability, and quality scores for any repository.",
+  icons: {
+    icon: "/icon.png",
+  },
 };
 
 /**
  * RootLayout component.
+
  * Provides the global HTML/Body structure and common UI elements.
  */
 export default function RootLayout({
@@ -44,8 +49,17 @@ export default function RootLayout({
         <Navbar />
         {children}
         <Footer />
-        
-        {/* Chatbase Widget: Implement using NEXT_PUBLIC_CHATBASE_BOT_ID when available */}
+
+        {/* Chatbase Widget */}
+        <Script
+          id="chatbase-widget"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...args)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(args)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...a)=>target(prop,...a)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="ii6tX46W_K7OmykyHJpIW";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+            `,
+          }}
+        />
       </body>
     </html>
   );

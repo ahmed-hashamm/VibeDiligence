@@ -27,7 +27,7 @@ export default function PageHero({ eyebrow, heading, subheading, lastUpdated }: 
 
       {/* Main Heading */}
       <h1
-        className="text-5xl md:text-8xl font-black tracking-tight mb-8 leading-[1.1]"
+        className="text-5xl md:text-7xl font-black tracking-tight mb-8 leading-[1.1]"
         dangerouslySetInnerHTML={{ __html: heading }}
       />
 

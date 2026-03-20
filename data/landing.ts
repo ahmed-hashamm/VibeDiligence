@@ -190,7 +190,8 @@ export const PRICING_TIERS = [
       "CUSTOM_COMPLIANCE_MAPPING",
     ],
     isHighlighted: false,
-    cta: "SELECT PRO",
+    comingSoon: true,
+    cta: "COMING SOON",
   },
 ];
 

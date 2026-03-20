@@ -22,10 +22,10 @@ export default function FaqSection({
   const heading = customHeading || "Frequently Asked Questions";
 
   return (
-    <section id="faq" className="w-full py-24 md:py-32 bg-bg relative overflow-hidden">
+    <section id="faq" className="w-full py-12 md:py-20 bg-bg relative overflow-hidden">
       <div className="container mx-auto px-6 max-w-4xl">
         {/* Header */}
-        <div className="text-center mb-20">
+        <div className="text-center mb-12">
           <h2 className="text-3xl md:text-5xl font-bold text-primary tracking-tight">
             {heading}
           </h2>

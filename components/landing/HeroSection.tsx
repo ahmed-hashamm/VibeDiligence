@@ -18,19 +18,19 @@ import StatusEyebrow from "@/components/ui/StatusEyebrow";
  */
 export default function HeroSection() {
   return (
-    <section className="relative w-full pt-32 pb-20 md:pt-28 md:pb-32 overflow-hidden hero-bg">
+    <section className="relative w-full pt-20 pb-8 md:pt-24 md:pb-16 overflow-hidden hero-bg">
       <GridBackground />
 
-      <div className="container  px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className="container  px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div className="flex flex-col items-start text-left z-10">
-          <StatusEyebrow text={HERO_CONTENT.badge} className="mb-6" />
+          <StatusEyebrow text={HERO_CONTENT.badge} className="mb-4" />
 
-          <h1 className="text-5xl md:text-8xl font-bold font-sans leading-[1.0] mb-8 tracking-tighter">
+          <h1 className="text-5xl md:text-8xl font-bold font-sans leading-[1.0] mb-4 tracking-tighter">
             {HERO_CONTENT.title_part1} <br />
             <span className="gradient-text">{HERO_CONTENT.title_part2}</span>
           </h1>
 
-          <p className="text-lg md:text-xl text-secondary mb-10 max-w-lg leading-relaxed font-medium">
+          <p className="text-base md:text-lg text-secondary mb-6 max-w-lg leading-relaxed font-medium">
             {HERO_CONTENT.subheading}
           </p>
 

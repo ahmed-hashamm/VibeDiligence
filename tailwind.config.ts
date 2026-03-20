@@ -8,7 +8,19 @@ const config: Config = {
     "./data/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    container: {
+      center: true,
+      padding: '2rem',
+      screens: {
+        '2xl': '1400px',
+      },
+    },
     extend: {
+      fontSize: {
+        '8xl': ['6rem', { lineHeight: '1' }],     /* 96px */
+        '7xl': ['4.25rem', { lineHeight: '1.1' }], /* 68px */
+        '6xl': ['3.25rem', { lineHeight: '1.2' }],    /* 52px */
+      },
       colors: {
         bg: 'var(--bg)',
         surface: 'var(--surface)',

@@ -28,7 +28,7 @@ export default function HeroVisual() {
   return (
     <div
       className="w-full flex items-center justify-center"
-      style={{ height: '600px' }}
+      style={{ height: '480px' }}
     >
       <svg
         viewBox="0 0 600 600"

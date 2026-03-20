@@ -33,13 +33,21 @@ export default function PricingSection() {
                 "p-8 md:p-10 relative flex flex-col bg-surface/30 transition-all duration-500",
                 tier.isHighlighted
                   ? "border-pink-500/40 shadow-[0_0_50px_rgba(255,46,109,0.1)]"
-                  : "border-white/5"
+                  : "border-white/5",
+                "comingSoon" in tier && (tier as any).comingSoon && "opacity-80"
               )}
             >
               {/* Popular Badge */}
               {tier.isHighlighted && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-pink-500 text-[10px] font-mono font-bold text-white tracking-[0.2em] shadow-lg shadow-pink-500/20">
                   MOST POPULAR
+                </div>
+              )}
+
+              {/* Coming Soon Badge */}
+              {"comingSoon" in tier && (tier as any).comingSoon && (
+                <div className="absolute -top-3 right-6 px-3 py-1 rounded-full bg-border text-[9px] font-mono font-bold text-secondary tracking-widest border border-white/5">
+                  COMING SOON
                 </div>
               )}
 
@@ -65,18 +73,26 @@ export default function PricingSection() {
                 ))}
               </ul>
 
-              <Link href="/audit" className="w-full">
-                <Button
-                  className={cn(
-                    "w-full py-6 text-[10px] tracking-[0.3em] font-bold uppercase rounded-sm transition-all duration-300",
-                    tier.isHighlighted
-                      ? "bg-pink-500 hover:bg-pink-600 text-white shadow-xl shadow-pink-500/10"
-                      : "bg-[#0a0a0b] border border-white/5 hover:border-white/10 text-white"
-                  )}
-                >
-                  {tier.cta}
-                </Button>
-              </Link>
+              {("comingSoon" in tier && (tier as any).comingSoon) ? (
+                <div className="w-full opacity-50 cursor-not-allowed">
+                  <div className="w-full py-6 text-[10px] tracking-[0.3em] font-bold uppercase rounded-sm bg-surface border border-white/5 text-muted text-center flex items-center justify-center">
+                    {tier.cta}
+                  </div>
+                </div>
+              ) : (
+                <Link href="/audit" className="w-full">
+                  <Button
+                    className={cn(
+                      "w-full py-6 text-[10px] tracking-[0.3em] font-bold uppercase rounded-sm transition-all duration-300",
+                      tier.isHighlighted
+                        ? "bg-pink-500 hover:bg-pink-600 text-white shadow-xl shadow-pink-500/10"
+                        : "bg-[#0a0a0b] border border-white/5 hover:border-white/10 text-white"
+                    )}
+                  >
+                    {tier.cta}
+                  </Button>
+                </Link>
+              )}
             </Card>
           ))}
         </div>

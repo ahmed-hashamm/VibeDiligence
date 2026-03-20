@@ -15,10 +15,10 @@ import { cn } from "@/lib/utils";
  */
 export default function FeaturesSection() {
   return (
-    <section id="features" className="w-full py-16 md:py-24 bg-bg relative overflow-hidden">
+    <section id="features" className="w-full py-12 md:py-20 bg-bg relative overflow-hidden">
       <div className=" mx-auto px-12 relative z-10">
         {/* Header */}
-        <div className="mb-20 text-center md:text-left">
+        <div className="mb-10 text-center md:text-left">
           <div className="text-[10px] font-mono font-bold text-pink-500 uppercase tracking-[0.4em] mb-4">
             {FEATURES_CONTENT.eyebrow}
           </div>
@@ -44,7 +44,7 @@ export default function FeaturesSection() {
             return (
               <Card
                 key={feature.title}
-                className="flex flex-col items-start p-10 bg-surface/30 border-white/5 hover:border-white/10 transition-colors group min-h-[320px]"
+                className="flex flex-col items-start p-8 bg-surface/30 border-white/5 hover:border-white/10 transition-colors group min-h-[300px]"
               >
                 <div className={cn("mb-8", colorClass)}>
                   <Icon size={32} strokeWidth={1.5} />

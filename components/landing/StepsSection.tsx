@@ -16,10 +16,10 @@ import { cn } from "@/lib/utils";
  */
 export default function StepsSection() {
   return (
-    <section id="how-it-works" className="w-full py-16 md:py-24 bg-bg relative">
+    <section id="how-it-works" className="w-full py-12 md:py-20 bg-bg relative">
       <div className=" mx-auto px-12 relative z-10">
         {/* Header */}
-        <div className="mb-16">
+        <div className="mb-10">
           <div className="text-[10px] font-mono font-bold text-pink-500 uppercase tracking-[0.4em] mb-4">
             {STEPS_CONTENT.eyebrow}
           </div>
@@ -31,7 +31,7 @@ export default function StepsSection() {
         {/* Custom Grid Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
           {/* STEP 01: Secure Integration (1/3 Width) */}
-          <Card className="lg:col-span-1 p-10 bg-surface/30 border-white/5 relative overflow-hidden flex flex-col justify-between">
+          <Card className="lg:col-span-1 p-8 bg-surface/30 border-white/5 relative overflow-hidden flex flex-col justify-between">
             <div className="absolute top-10 right-10 text-white/10">
               <Link size={48} strokeWidth={1.5} />
             </div>
@@ -56,7 +56,7 @@ export default function StepsSection() {
           </Card>
 
           {/* STEP 02: Neural Dependency Mapping (2/3 Width) */}
-          <Card className="lg:col-span-2 p-10 bg-surface/30 border-white/5 relative overflow-hidden flex flex-col md:flex-row gap-12 items-start justify-between">
+          <Card className="lg:col-span-2 p-8 bg-surface/30 border-white/5 relative overflow-hidden flex flex-col md:flex-row gap-12 items-start justify-between">
             <div className="flex-1">
               <div className="text-sm font-mono text-muted uppercase tracking-widest mb-6">
                 STEP_{STEPS[1].number}
@@ -86,7 +86,7 @@ export default function StepsSection() {
         </div>
 
         {/* STEP 03: Investor-Ready Reports (Full Width) */}
-        <Card className="col-span-full p-10 bg-surface/30 border-white/5 relative overflow-hidden flex flex-col md:flex-row gap-12 items-center justify-between min-h-[250px]">
+        <Card className="col-span-full p-8 bg-surface/30 border-white/5 relative overflow-hidden flex flex-col md:flex-row gap-8 items-center justify-between min-h-[220px]">
           <div className="flex-1">
             <div className="text-sm font-mono text-muted uppercase tracking-widest mb-6">
               STEP_{STEPS[2].number}

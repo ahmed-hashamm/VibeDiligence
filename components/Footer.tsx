@@ -1,9 +1,7 @@
-/**
- * @file Footer.tsx
- * @description Site-wide footer with branding, navigation links, and social icons.
- */
+"use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { FOOTER_COLUMNS } from "@/data/navigation";
 import { Twitter, Linkedin, Github } from "lucide-react";
 
@@ -12,9 +10,12 @@ import { Twitter, Linkedin, Github } from "lucide-react";
  * Displays brand description, multi-column navigation, and legal/social links.
  */
 export default function Footer() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+
   return (
     <footer className="w-full bg-bg border-t border-white/5 pt-20 pb-10 relative z-10 overflow-hidden">
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center gap-2 mb-6">
@@ -31,9 +32,9 @@ export default function Footer() {
             </p>
           </div>
 
-          {FOOTER_COLUMNS.map((column) => (
+          {FOOTER_COLUMNS.filter(col => isHome || col.title !== "Product").map((column) => (
             <div key={column.title}>
-              <h4 className="text-sm font-bold text-primary uppercase tracking-widest mb-6 px-1 border-l-2 border-pink-500">
+              <h4 className="text-[10px] font-bold text-primary uppercase tracking-[0.3em] mb-6 px-1 border-l-2 border-pink-500">
                 {column.title}
               </h4>
               <ul className="space-y-4">
@@ -41,7 +42,7 @@ export default function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-sm text-muted hover:text-pink-500 transition-colors"
+                      className="text-[11px] font-medium text-muted hover:text-pink-500 transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -52,12 +53,12 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div className="pt-10 border-t border-white/5 flex flex-col md:flex-row justify-center items-center gap-6">
           <p className="text-xs font-mono text-muted">
             © {new Date().getFullYear()} VibeDiligence. All rights reserved.
           </p>
 
-          <div className="flex items-center gap-6">
+          {/* <div className="flex items-center gap-6">
             <a href="https://twitter.com" className="text-muted hover:text-pink-500 transition-colors" target="_blank" rel="noopener noreferrer">
               <Twitter size={18} />
             </a>
@@ -67,7 +68,7 @@ export default function Footer() {
             <a href="https://github.com" className="text-muted hover:text-pink-500 transition-colors" target="_blank" rel="noopener noreferrer">
               <Github size={18} />
             </a>
-          </div>
+          </div> */}
         </div>
       </div>
 
