@@ -107,7 +107,7 @@ export default function UnlockedReport({ audit }: UnlockedReportProps) {
 
       {/* Header with score + PDF download */}
       <ScrollReveal delay={0.2}>
-        <div className="max-w-5xl mx-auto mb-10">
+        <div className="max-w-5xl mx-auto mb-10 rounded-sm  border-l-2 border-pink-500/20">
           <Card className="p-8 md:p-12">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
               <div className="space-y-4">
@@ -116,9 +116,9 @@ export default function UnlockedReport({ audit }: UnlockedReportProps) {
                   <span
                     className="px-4 py-2 rounded-full text-sm font-bold border"
                     style={{
-                      color: verdictConfig?.color ?? "#F0F0FF",
-                      borderColor: `${verdictConfig?.color ?? "#F0F0FF"}40`,
-                      backgroundColor: `${verdictConfig?.color ?? "#F0F0FF"}10`,
+                      color: verdictConfig?.color ?? "#ff2d6b",
+                      borderColor: `${verdictConfig?.color ?? "#ff2d6b"}40`,
+                      backgroundColor: `${verdictConfig?.color ?? "#ff2d6b"}10`,
                     }}
                   >
                     {verdictConfig?.label ?? scores.verdict}
@@ -137,12 +137,12 @@ export default function UnlockedReport({ audit }: UnlockedReportProps) {
               <div className="flex items-center gap-8">
                 <div className="text-center">
                   <p
-                    className="text-6xl font-black font-mono"
+                    className="text-8xl font-black font-mono"
                     style={{ color: getScoreColor(scores.overall_score) }}
                   >
                     {scores.overall_score}
                   </p>
-                  <p className="text-xs font-mono text-muted mt-1">OVERALL</p>
+                  <p className="text-sm font-mono text-muted mt-1">OVERALL</p>
                 </div>
                 <a href={`/api/report/${audit.id}`}>
                   <Button variant="primary" className="gap-2">
@@ -158,7 +158,7 @@ export default function UnlockedReport({ audit }: UnlockedReportProps) {
       {/* Executive Summary */}
       {scores.executive_summary && (
         <ScrollReveal delay={0.25}>
-          <div className="max-w-5xl mx-auto mb-10">
+          <div className="max-w-5xl mx-auto mb-10 rounded-sm border-l-2 border-pink-500/20">
             <Card className="p-8">
               <p className="text-xs font-mono text-muted uppercase tracking-widest mb-4">Executive Summary</p>
               <p className="text-secondary/80 leading-relaxed">{scores.executive_summary}</p>
