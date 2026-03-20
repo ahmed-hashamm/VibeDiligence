@@ -4,6 +4,20 @@ import { Card } from "@/components/ui/Card";
 import { Lock, CheckCircle } from "lucide-react";
 import { PAYWALL_CONTENT } from "@/data/audit-labels";
 
+/** Paddle.js global type declaration for TypeScript */
+declare global {
+  interface Window {
+    Paddle?: {
+      Checkout: {
+        open: (options: {
+          items: { priceId: string; quantity: number }[];
+          customData?: Record<string, string>;
+        }) => void;
+      };
+    };
+  }
+}
+
 interface PaywallOverlayProps {
   auditId: string;
   repoUrl: string;
@@ -12,10 +26,27 @@ interface PaywallOverlayProps {
 /**
  * PaywallOverlay component.
  * High-fidelity call-to-action for unlocking the full audit report via Paddle checkout.
+ * Uses Paddle.js overlay checkout (Paddle Billing v2).
  */
 export default function PaywallOverlay({ auditId, repoUrl }: PaywallOverlayProps) {
   const repoName = repoUrl.replace("https://github.com/", "");
-  const checkoutUrl = `${process.env.NEXT_PUBLIC_PADDLE_CHECKOUT_URL}?custom_data[audit_id]=${auditId}`;
+  const priceId = process.env.NEXT_PUBLIC_PADDLE_PRICE_ID;
+
+  function handleCheckout() {
+    if (!window.Paddle) {
+      console.error("Paddle.js not loaded");
+      return;
+    }
+    if (!priceId) {
+      console.error("NEXT_PUBLIC_PADDLE_PRICE_ID is not set");
+      return;
+    }
+
+    window.Paddle.Checkout.open({
+      items: [{ priceId, quantity: 1 }],
+      customData: { audit_id: auditId },
+    });
+  }
 
   return (
     <div className="absolute inset-0 z-20 flex items-center justify-center p-6">
@@ -39,12 +70,12 @@ export default function PaywallOverlay({ auditId, repoUrl }: PaywallOverlayProps
         </div>
 
         <div className="flex flex-col gap-4">
-          <a
-            href={checkoutUrl}
-            className="btn-primary w-full py-4 text-lg text-center inline-block"
+          <button
+            onClick={handleCheckout}
+            className="btn-primary w-full py-4 text-lg text-center"
           >
             Unlock Report • ${PAYWALL_CONTENT.price}
-          </a>
+          </button>
           
           <div className="flex items-center justify-center gap-4 text-[10px] font-mono text-muted uppercase">
             <span>SECURE PADDLE</span>
@@ -56,4 +87,3 @@ export default function PaywallOverlay({ auditId, repoUrl }: PaywallOverlayProps
     </div>
   );
 }
-

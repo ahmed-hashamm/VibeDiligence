@@ -50,6 +50,24 @@ export default function RootLayout({
         {children}
         <Footer />
 
+        {/* Paddle.js SDK — loaded before checkout can be triggered */}
+        <Script
+          src="https://cdn.paddle.com/paddle/v2/paddle.js"
+          strategy="beforeInteractive"
+        />
+        <Script
+          id="paddle-init"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (typeof Paddle !== 'undefined') {
+                ${process.env.NEXT_PUBLIC_PADDLE_ENV === 'sandbox' ? 'Paddle.Environment.set("sandbox");' : ''}
+                Paddle.Setup({ token: "${process.env.NEXT_PUBLIC_PADDLE_CLIENT_TOKEN || ''}" });
+              }
+            `,
+          }}
+        />
+
         {/* Chatbase Widget */}
         <Script
           id="chatbase-widget"
