@@ -40,7 +40,7 @@ export default function ResultsContent({ audit }: ResultsContentProps) {
       <ScrollReveal delay={0.4}>
         <div className="mt-20 text-center">
           <p className="text-muted mb-4">Questions about this audit?</p>
-          <a href="mailto:support@vibediligence.com" className="flex items-center justify-center gap-2 text-pink-500 hover:text-pink-400 font-medium transition-colors">
+          <a href="mailto:support@vibediligence.tech" className="flex items-center justify-center gap-2 text-pink-500 hover:text-pink-400 font-medium transition-colors">
             <ShieldIcon size={16} /> Contact Support
           </a>
         </div>

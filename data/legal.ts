@@ -11,9 +11,9 @@ export const PRIVACY_CONTENT: LegalContent = {
   heading: "Privacy <span class='text-pink-500'>—</span> VibeDiligence",
   // subheading: "and VibeDiligence, the solution with vibe.",
   lastUpdated: "Last updated: March 19, 2026",
-  intro: "VibeDiligence ('we', 'us', or 'our') is a product of VibeDiligence Limited (represented by vibediligence.com). This Privacy Policy explains what personal data we collect, how we use it, and your rights regarding that data.",
+  intro: "VibeDiligence ('we', 'us', or 'our') is a product of VibeDiligence Limited (represented by vibediligence.tech). This Privacy Policy explains what personal data we collect, how we use it, and your rights regarding that data.",
   acknowledgement: "By using VibeDiligence, you acknowledge that you have read and understood this Privacy Policy.",
-  contactLine: "For any privacy-related inquiries, contact us at: support@vibediligence.com",
+  contactLine: "For any privacy-related inquiries, contact us at: support@vibediligence.tech",
   sections: [
     {
       id: "1",
@@ -164,7 +164,7 @@ export const PRIVACY_CONTENT: LegalContent = {
         "Object — Request that we stop processing your personal data.",
         "Withdrawal — Withdraw consent for data processing at any time."
       ],
-      footer: "To exercise any right, email support@vibediligence.com with your request. Additional information for identify verification purposes (such as email or audit ID) will be required within 30 days. In some cases we may keep some of your information for legal or business reasons. Any other digital asset or record that is not personal is not covered by this policy as we retain it for historical record at point of creation for calculations."
+      footer: "To exercise any right, email support@vibediligence.tech with your request. Additional information for identify verification purposes (such as email or audit ID) will be required within 30 days. In some cases we may keep some of your information for legal or business reasons. Any other digital asset or record that is not personal is not covered by this policy as we retain it for historical record at point of creation for calculations."
     },
     {
       id: "9",
@@ -175,7 +175,7 @@ export const PRIVACY_CONTENT: LegalContent = {
       id: "10",
       title: "Children's Privacy",
       intro: "VibeDiligence is not directed to individuals under the age of 13. We do not knowingly collect personal information from children under the age of 13. If we learn that we have collected information from a child under 13, we will promptly delete such information.",
-      footer: "Contact us at support@vibediligence.com if you believe we have inadvertently collected such data."
+      footer: "Contact us at support@vibediligence.tech if you believe we have inadvertently collected such data."
     },
     {
       id: "11",
@@ -186,7 +186,7 @@ export const PRIVACY_CONTENT: LegalContent = {
   contact: {
     title: "Contact",
     description: "For any privacy-related inquiries, please reach out to us at:",
-    email: "support@vibediligence.com"
+    email: "support@vibediligence.tech"
   }
 };
 
@@ -194,9 +194,9 @@ export const TERMS_CONTENT: LegalContent = {
   eyebrow: "LEGAL INFRASTRUCTURE V1.0",
   heading: "Terms <span class='text-pink-500'>—</span> VibeDiligence",
   lastUpdated: "Last updated: March 2026",
-  intro: "VibeDiligence ('Service', 'we', 'us', 'our') is an AI-powered technical audit service accessible at vibediligence.com.",
+  intro: "VibeDiligence ('Service', 'we', 'us', 'our') is an AI-powered technical audit service accessible at vibediligence.tech.",
   acknowledgement: "PLEASE READ THESE TERMS CAREFULLY. BY ACCESSING OR USING VIBEDILIGENCE, OR BY CLICKING 'I AGREE', YOU AGREE TO BE LEGALLY BOUND BY THESE TERMS. IF YOU DO NOT AGREE, DO NOT USE THIS SERVICE.",
-  contactLine: "For questions about these Terms, contact us at: support@vibediligence.com",
+  contactLine: "For questions about these Terms, contact us at: support@vibediligence.tech",
   sections: [
     {
       id: "1",
@@ -337,7 +337,7 @@ export const TERMS_CONTENT: LegalContent = {
         },
         {
           title: "5.3 Refund Process",
-          content: "To request a refund under Section 5.1, email support@vibediligence.com with your purchase email address and audit ID (available in your Paddle receipt). We will respond within 5 business days. Approved refunds are issued back to the original payment method via Paddle, subject to Paddle's processing timelines (typically 5–10 business days)."
+          content: "To request a refund under Section 5.1, email support@vibediligence.tech with your purchase email address and audit ID (available in your Paddle receipt). We will respond within 5 business days. Approved refunds are issued back to the original payment method via Paddle, subject to Paddle's processing timelines (typically 5–10 business days)."
         }
       ]
     },
@@ -457,13 +457,13 @@ export const TERMS_CONTENT: LegalContent = {
     },
     {
       question: "19. Contact",
-      answer: "For questions about these Terms: Email support@vibediligence.com. Response time: We aim to respond within 10 business days. Language of communication: English."
+      answer: "For questions about these Terms: Email support@vibediligence.tech. Response time: We aim to respond within 10 business days. Language of communication: English."
     }
   ],
   contact: {
     title: "Legal Contact",
     description: "Questions regarding these terms? contact:",
-    email: "support@vibediligence.com"
+    email: "support@vibediligence.tech"
   }
 };
 
@@ -482,7 +482,7 @@ export const SECURITY_CONTENT = {
       icon: "Shield",
       intro: "If you discover a potential security vulnerability in VibeDiligence, please report it to us privately before disclosing it publicly.",
       contact: {
-        email: "support@vibediligence.com",
+        email: "support@vibediligence.tech",
         subject: "[SECURITY] Brief description"
       },
       includeInReport: [
@@ -587,13 +587,13 @@ export const SECURITY_CONTENT = {
   },
   reporting: {
     title: "Reporting a Vulnerability",
-    email: "support@vibediligence.com",
+    email: "support@vibediligence.tech",
     subject: "[SECURITY] Brief description of the issue",
     thankYou: "We appreciate the security research community and will handle all reports professionally and confidentially."
   },
   contact: {
     title: "Security Contact",
     description: "Questions regarding our security infrastructure? contact:",
-    email: "support@vibediligence.com"
+    email: "support@vibediligence.tech"
   }
 };

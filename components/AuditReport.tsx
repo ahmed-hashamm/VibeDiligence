@@ -118,7 +118,7 @@ const s = StyleSheet.create({
 
   coverBottom: { padding: 48, flex: 1, justifyContent: 'flex-end' },
   coverScoreRow: { flexDirection: 'row', alignItems: 'flex-end', gap: 6, marginBottom: 4 },
-  coverScoreNumber: { fontSize: 72, fontWeight: 'bold', fontFamily: 'Courier', lineHeight: 1 },
+  coverScoreNumber: { fontSize: 72, fontFamily: 'Courier-Bold', lineHeight: 1 },
   coverScoreLabel: { fontSize: 9, color: C.muted, letterSpacing: 2, marginBottom: 14 },
   coverScoreDesc: { fontSize: 11, color: C.secondary, maxWidth: 340, lineHeight: 1.6 },
 
@@ -132,7 +132,7 @@ const s = StyleSheet.create({
     padding: 14,
   },
   coverGridLabel: { fontSize: 7, color: C.muted, letterSpacing: 1.5, textTransform: 'uppercase', marginBottom: 6 },
-  coverGridValue: { fontSize: 13, fontWeight: 'bold', fontFamily: 'Courier' },
+  coverGridValue: { fontSize: 13, fontFamily: 'Courier-Bold' },
 
   // ── Section primitives
   sectionLabel: {
@@ -160,7 +160,7 @@ const s = StyleSheet.create({
     padding: 20,
   },
   scoreCardLabel: { fontSize: 8, color: C.secondary, letterSpacing: 1.5, textTransform: 'uppercase', marginBottom: 10 },
-  scoreCardNumber: { fontSize: 32, fontWeight: 'bold', fontFamily: 'Courier' },
+  scoreCardNumber: { fontSize: 32, fontFamily: 'Courier-Bold' },
   scoreCardBar: { height: 3, backgroundColor: C.border, borderRadius: 2, marginTop: 12 },
   scoreCardFill: { height: 3, borderRadius: 2 },
   scoreCardSummary: { fontSize: 8.5, color: C.secondary, lineHeight: 1.6, marginTop: 10 },

@@ -365,7 +365,7 @@ export default function UnlockedReport({ audit }: UnlockedReportProps) {
       <ScrollReveal delay={0.5}>
         <div className="text-center">
           <p className="text-muted mb-4">Questions about this audit?</p>
-          <a href="mailto:support@vibediligence.com" className="flex items-center justify-center gap-2 text-pink-500 hover:text-pink-400 font-medium transition-colors">
+          <a href="mailto:support@vibediligence.tech" className="flex items-center justify-center gap-2 text-pink-500 hover:text-pink-400 font-medium transition-colors">
             Contact Support
           </a>
         </div>

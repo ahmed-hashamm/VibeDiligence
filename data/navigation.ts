@@ -18,7 +18,7 @@ export const FOOTER_COLUMNS = [
     links: [
       { label: "About", href: "/about" },
       { label: "Security", href: "/security" },
-      { label: "Contact", href: "mailto:support@vibediligence.com" },
+      { label: "Contact", href: "mailto:support@vibediligence.tech" },
     ],
   },
   {

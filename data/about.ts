@@ -46,6 +46,6 @@ export const ABOUT_CONTENT = {
   contact: {
     title: "Connect with Diligence",
     description: "Interested in enterprise-grade custom audits or strategic partnerships? Our team is available for high-level technical consultation.",
-    email: "support@vibediligence.com",
+    email: "support@vibediligence.tech",
   }
 };
