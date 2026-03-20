@@ -166,7 +166,6 @@ async function sendReportEmail(
   const repoName = audit.repo_url.replace('https://github.com/', '').replace(/\//g, '-');
   const hasAttachment = !!(pdfBuffer && pdfBuffer.length > 0);
 
-  console.log(`[Paddle Webhook] Sending email to ${email} (PDF: ${hasAttachment})`);
 
   try {
     const { data, error } = await getResend().emails.send({
@@ -185,7 +184,7 @@ async function sendReportEmail(
     if (error) {
       console.error('[Paddle Webhook] Resend error:', error);
     } else {
-      console.log(`[Paddle Webhook] Email sent: ${data?.id}`);
+      // Email sent successfully
     }
   } catch (err) {
     console.error('[Paddle Webhook] Email failed:', err);
@@ -195,7 +194,6 @@ async function sendReportEmail(
 // ─── Route Handler ─────────────────────────────────────────────────────────
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
-  console.log('[Paddle Webhook] START');
 
   // 1. Raw body first
   const rawBody = await req.text();
@@ -226,7 +224,6 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
   // If email isn't in the webhook payload, fetch it explicitly via the Paddle API
   if (!email && customerId) {
-    console.log(`[Paddle Webhook] Fetching customer ${customerId} from Paddle API...`);
     try {
       const res = await fetch(`${getPaddleApiUrl()}/customers/${customerId}`, {
         headers: {
@@ -236,7 +233,6 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       if (res.ok) {
         const cData = await res.json();
         email = cData.data?.email;
-        console.log(`[Paddle Webhook] Retrieved buyer email: ${email}`);
       } else {
         console.warn(`[Paddle Webhook] Failed to fetch customer API. Status: ${res.status}`);
       }
@@ -245,7 +241,6 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     }
   }
 
-  console.log(`[Paddle Webhook] AuditID: ${auditId}, Email: ${email}`);
 
   if (!auditId || !isValidUUID(auditId)) {
     return NextResponse.json({ error: 'Invalid audit ID' }, { status: 400 });
@@ -259,7 +254,6 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     .single();
 
   if (!existing || existing.paid === true) {
-    console.log('[Paddle Webhook] Skipping: paid or not found');
     return NextResponse.json({ received: true }, { status: 200 });
   }
 
@@ -273,7 +267,6 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     console.error('[Paddle Webhook] DB error:', updateError);
     return NextResponse.json({ error: 'DB failure' }, { status: 500 });
   }
-  console.log('[Paddle Webhook] DB updated to PAID');
 
   // 7. Processing Delivery
   try {
@@ -283,7 +276,6 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       let timeoutId: any;
 
       try {
-        console.log('[Paddle Webhook] PDF generation start (5s limit)...');
         const timeoutPromise = new Promise<undefined>((_, reject) => {
           timeoutId = setTimeout(() => reject(new Error('TIMEOUT')), 5000);
         });
@@ -304,6 +296,5 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     console.error('[Paddle Webhook] Internal delivery error:', err);
   }
 
-  console.log('[Paddle Webhook] FINISHED');
   return NextResponse.json({ received: true, paid: true }, { status: 200 });
 }
