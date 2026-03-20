@@ -60,7 +60,7 @@ function IssueCard({ issue }: { issue: AuditIssue }) {
 
       {/* Code snippet */}
       {issue.code_snippet && issue.code_snippet !== "N/A" && (
-        <pre className="text-xs font-mono bg-black/40 border border-white/5 rounded p-3 overflow-x-auto text-secondary/70 whitespace-pre-wrap">
+        <pre className="text-sm font-mono bg-black/40 border border-white/5 rounded p-4 overflow-x-auto text-primary/90 whitespace-pre-wrap leading-relaxed">
           {issue.code_snippet}
         </pre>
       )}
@@ -145,7 +145,7 @@ export default function UnlockedReport({ audit }: UnlockedReportProps) {
                   <p className="text-xs font-mono text-muted mt-1">OVERALL</p>
                 </div>
                 <a href={`/api/report/${audit.id}`}>
-                  <Button variant="ghost" className="gap-2">
+                  <Button variant="primary" className="gap-2">
                     <Download size={16} /> Download PDF
                   </Button>
                 </a>
@@ -166,6 +166,50 @@ export default function UnlockedReport({ audit }: UnlockedReportProps) {
           </div>
         </ScrollReveal>
       )}
+
+      {/* Metrics Grid (Score Boxes) - Replicated from Example UI */}
+      <ScrollReveal delay={0.28}>
+        <div className="max-w-5xl mx-auto mb-16 grid grid-cols-1 md:grid-cols-2 gap-6">
+          {sections.map((s) => {
+            const section = scores[s.key];
+            const color = getScoreColor(section.score);
+            let statusLabel = "CRITICAL RISK";
+            if (section.score >= 80) statusLabel = "STRONG";
+            else if (section.score >= 60) statusLabel = "MODERATE";
+            else if (section.score >= 40) statusLabel = "ATTENTION NEEDED";
+
+            return (
+              <Card key={s.key} className="p-10 border-white/5 bg-surface/20 rounded-sm relative overflow-hidden flex flex-col justify-between group">
+                <div
+                  className="absolute top-0 left-0 w-1.5 h-full opacity-80"
+                  style={{ backgroundColor: color }}
+                />
+
+                <div className="flex justify-between items-start mb-8">
+                  <span className="text-[11px] font-mono font-bold text-secondary/40 uppercase tracking-[0.2em]">
+                    {s.label}
+                  </span>
+                  <span className="text-3xl font-bold font-mono" style={{ color }}>
+                    {section.score}%
+                  </span>
+                </div>
+
+                <div className="space-y-6">
+                  <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                    <div
+                      className="h-full transition-all duration-1000"
+                      style={{ width: `${section.score}%`, backgroundColor: color }}
+                    />
+                  </div>
+                  <p className="text-[10px] font-mono font-bold text-secondary/30 uppercase tracking-[0.1em]">
+                    {statusLabel}
+                  </p>
+                </div>
+              </Card>
+            );
+          })}
+        </div>
+      </ScrollReveal>
 
       {/* Strengths */}
       {scores.strengths && scores.strengths.length > 0 && (
