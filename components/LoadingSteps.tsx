@@ -7,19 +7,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { CheckCircle, Loader2, Circle } from "lucide-react";
-
-/** Loading step labels displayed during audit processing. */
-const STEPS = [
-  "Connecting to GitHub API...",
-  "Fetching repository file tree...",
-  "Analyzing code with AI engine...",
-  "Scoring security & quality patterns...",
-  "Generating audit report...",
-];
+import { CheckCircle, Loader2, Circle, BrainCircuit } from "lucide-react";
+import { AUDIT_STEPS, AGENT_THOUGHTS } from "@/data/loading-messages";
 
 /** Threshold in seconds before showing the "taking longer" message. */
-const SLOW_THRESHOLD_MS = 45_000;
+const SLOW_THRESHOLD_MS = 60_000;
 
 interface LoadingStepsProps {
   currentStep: number;
@@ -28,59 +20,78 @@ interface LoadingStepsProps {
 /**
  * LoadingSteps component.
  * Shows a vertically stacked step list with animated state indicators.
- * Active step: pink pulsing dot, white text.
- * Done step: green checkmark.
- * Pending step: muted text.
+ * Includes a dynamic "Agentic Thoughts" ticker.
  */
 export default function LoadingSteps({ currentStep }: LoadingStepsProps) {
   const [showSlow, setShowSlow] = useState(false);
+  const [thoughtIndex, setThoughtIndex] = useState(0);
 
   useEffect(() => {
     const timer = setTimeout(() => setShowSlow(true), SLOW_THRESHOLD_MS);
-    return () => clearTimeout(timer);
+    const thoughtTimer = setInterval(() => {
+      setThoughtIndex(prev => (prev + 1) % AGENT_THOUGHTS.length);
+    }, 2500);
+    return () => {
+      clearTimeout(timer);
+      clearInterval(thoughtTimer);
+    };
   }, []);
 
   return (
-    <div className="space-y-6 py-8">
-      {STEPS.map((label, i) => {
-        const isDone = i < currentStep;
-        const isActive = i === currentStep;
+    <div className="space-y-6 py-4">
+      <div className="space-y-4">
+        {AUDIT_STEPS.map((label, i) => {
+          const isDone = i < currentStep;
+          const isActive = i === currentStep;
 
-        return (
-          <div
-            key={label}
-            className={`flex items-center gap-4 transition-all duration-300 ${
-              isDone ? "opacity-60" : isActive ? "opacity-100" : "opacity-30"
-            }`}
-          >
-            {/* Status icon */}
-            {isDone ? (
-              <CheckCircle size={20} className="text-success flex-shrink-0" />
-            ) : isActive ? (
-              <Loader2 size={20} className="text-pink-500 animate-spin flex-shrink-0" />
-            ) : (
-              <Circle size={20} className="text-muted flex-shrink-0" />
-            )}
-
-            {/* Step label */}
-            <span
-              className={`text-sm font-mono tracking-wide ${
-                isDone
-                  ? "text-secondary line-through"
-                  : isActive
-                  ? "text-primary font-semibold"
-                  : "text-muted"
+          return (
+            <div
+              key={label}
+              className={`flex items-center gap-4 transition-all duration-300 ${
+                isDone ? "opacity-40" : isActive ? "opacity-100" : "opacity-20"
               }`}
             >
-              {label}
-            </span>
+              {/* Status icon */}
+              {isDone ? (
+                <CheckCircle size={14} className="text-success flex-shrink-0" />
+              ) : isActive ? (
+                <Loader2 size={14} className="text-pink-500 animate-spin flex-shrink-0" />
+              ) : (
+                <Circle size={14} className="text-muted flex-shrink-0" />
+              )}
+
+              {/* Step label */}
+              <span
+                className={`text-xs font-mono tracking-wide ${
+                  isDone
+                    ? "text-secondary line-through"
+                    : isActive
+                    ? "text-primary font-semibold"
+                    : "text-muted"
+                }`}
+              >
+                {label}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="pt-6 border-t border-white/5">
+        <div className="flex items-start gap-4 p-4 rounded-xl bg-pink-500/5 border border-pink-500/10 min-h-[80px]">
+          <BrainCircuit size={18} className="text-pink-500 flex-shrink-0 mt-1" />
+          <div className="space-y-1">
+            <p className="text-[10px] font-mono text-pink-500/60 uppercase tracking-widest font-bold">Agentic Thoughts</p>
+            <p className="text-xs text-secondary leading-relaxed transition-all duration-500 animate-in fade-in slide-in-from-bottom-1">
+              {AGENT_THOUGHTS[thoughtIndex]}
+            </p>
           </div>
-        );
-      })}
+        </div>
+      </div>
 
       {showSlow && (
-        <p className="text-xs text-warning/80 font-mono mt-4 animate-pulse">
-          Taking longer than usual — large repos need more time...
+        <p className="text-center text-[10px] text-warning/60 font-mono mt-4 animate-pulse">
+          Analyzing a large codebase — this institutional audit takes time...
         </p>
       )}
     </div>

@@ -119,7 +119,7 @@ export default function UnlockedReport({ audit }: UnlockedReportProps) {
                     style={{
                       color: verdictConfig?.color ?? "#ff2d6b",
                       borderColor: `${verdictConfig?.color ?? "#ff2d6b"}40`,
-                      backgroundColor: `${verdictConfig?.color ?? "#ff2d6b"}10`,
+                      backgroundColor: `${verdictConfig?.color ?? "#ff2d6b"}20`,
                     }}
                   >
                     {verdictConfig?.label ?? scores.verdict}

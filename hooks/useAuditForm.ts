@@ -80,13 +80,13 @@ export function useAuditForm(): UseAuditFormReturn {
     setLoading(true);
     setCurrentStep(0);
 
-    // Auto-advance loading steps every 4 seconds
+    // Auto-advance loading steps every 3 seconds across 10 steps
     const stepInterval = setInterval(() => {
       setCurrentStep(prev => {
-        if (prev < 4) return prev + 1;
+        if (prev < 9) return prev + 1;
         return prev;
       });
-    }, 4000);
+    }, 3000);
 
     try {
       const res = await fetch("/api/audit", {

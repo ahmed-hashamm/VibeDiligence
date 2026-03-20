@@ -1,9 +1,11 @@
 "use client";
 
 import { Card } from "@/components/ui/Card";
-import { Lock, CheckCircle, Loader2 } from "lucide-react";
+import { Lock, CheckCircle, Loader2, BrainCircuit } from "lucide-react";
 import { PAYWALL_CONTENT } from "@/data/audit-labels";
+import { UNLOCKING_MESSAGES } from "@/data/loading-messages";
 import { useState, useEffect, useCallback } from "react";
+import ScrollReveal from "@/components/ScrollReveal";
 
 /** Paddle.js v2 global type declaration for TypeScript */
 declare const Paddle: {
@@ -31,6 +33,15 @@ export default function PaywallOverlay({ auditId, repoUrl, email }: PaywallOverl
   const repoName = repoUrl.replace("https://github.com/", "");
   const priceId = process.env.NEXT_PUBLIC_PADDLE_PRICE_ID;
   const [isProcessing, setIsProcessing] = useState(false);
+  const [tickerIndex, setTickerIndex] = useState(0);
+
+  useEffect(() => {
+    if (!isProcessing) return;
+    const interval = setInterval(() => {
+      setTickerIndex(prev => (prev + 1) % UNLOCKING_MESSAGES.length);
+    }, 2800);
+    return () => clearInterval(interval);
+  }, [isProcessing]);
 
   /**
    * Polls the payment status API until paid=true, then reloads the page.
@@ -109,17 +120,28 @@ export default function PaywallOverlay({ auditId, repoUrl, email }: PaywallOverl
   // Processing state — show after successful checkout
   if (isProcessing) {
     return (
-      <div className="absolute inset-0 z-20 flex items-center justify-center p-6">
-        <Card className="max-w-lg w-full p-10 md:p-12 border-emerald-500/50 shadow-[0_0_80px_rgba(16,199,132,0.2)] bg-surface-raised/95 backdrop-blur-md text-center">
-          <div className="w-16 h-16 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-500 mx-auto mb-8">
-            <Loader2 size={32} className="animate-spin" />
-          </div>
-          <h3 className="text-3xl font-bold mb-4">Payment Received!</h3>
-          <p className="text-secondary leading-relaxed">
-            Unlocking your full report for <span className="text-primary font-bold">{repoName}</span>...
-          </p>
-          <p className="text-muted text-sm mt-4">This usually takes a few seconds.</p>
-        </Card>
+      <div className="absolute inset-0 z-20 flex items-center justify-center p-6 bg-bg/80 backdrop-blur-sm">
+        <ScrollReveal>
+          <Card className="max-w-lg w-full p-10 md:p-12 border-emerald-500/30 shadow-[0_0_80px_rgba(16,199,132,0.15)] bg-surface-raised/95 backdrop-blur-md text-center">
+            <div className="w-20 h-20 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-500 mx-auto mb-8 border border-emerald-500/20">
+              <Loader2 size={40} className="animate-spin" />
+            </div>
+            <h3 className="text-3xl font-bold mb-4">Payment Received!</h3>
+            <p className="text-secondary leading-relaxed mb-10">
+              Unlocking your institutional-grade audit for <span className="text-primary font-bold">{repoName}</span>...
+            </p>
+
+            <div className="flex items-start gap-4 p-5 rounded-2xl bg-emerald-500/5 border border-emerald-500/10 text-left min-h-[90px]">
+              <BrainCircuit size={20} className="text-emerald-500 flex-shrink-0 mt-1" />
+              <div className="space-y-1">
+                <p className="text-[10px] font-mono text-emerald-500/60 uppercase tracking-widest font-bold">Process Sync</p>
+                <p className="text-sm text-secondary leading-relaxed transition-all duration-500 animate-in fade-in slide-in-from-bottom-1">
+                  {UNLOCKING_MESSAGES[tickerIndex]}
+                </p>
+              </div>
+            </div>
+          </Card>
+        </ScrollReveal>
       </div>
     );
   }

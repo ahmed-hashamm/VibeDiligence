@@ -13,11 +13,11 @@ export const VERDICT_CONFIG = {
   },
   fix_first: {
     label: "Fix Critical Issues First",
-    color: "#FF7A00",
+    color: "#F0A500",
     icon: "AlertTriangle",
   },
   needs_work: {
-    label: "Needs Significant Work",
+    label: "Needs Work",
     color: "#FF4444",
     icon: "XCircle",
   },
