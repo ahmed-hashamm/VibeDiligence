@@ -4,19 +4,16 @@ import { Card } from "@/components/ui/Card";
 import { Lock, CheckCircle } from "lucide-react";
 import { PAYWALL_CONTENT } from "@/data/audit-labels";
 
-/** Paddle.js global type declaration for TypeScript */
-declare global {
-  interface Window {
-    Paddle?: {
-      Checkout: {
-        open: (options: {
-          items: { priceId: string; quantity: number }[];
-          customData?: Record<string, string>;
-        }) => void;
-      };
-    };
-  }
-}
+/** Paddle.js v2 global type declaration for TypeScript */
+declare const Paddle: {
+  Checkout: {
+    open: (options: {
+      items: { priceId: string; quantity: number }[];
+      customData?: Record<string, string>;
+    }) => void;
+  };
+  Initialize: (options: { token: string; environment?: string }) => void;
+} | undefined;
 
 interface PaywallOverlayProps {
   auditId: string;
@@ -33,7 +30,7 @@ export default function PaywallOverlay({ auditId, repoUrl }: PaywallOverlayProps
   const priceId = process.env.NEXT_PUBLIC_PADDLE_PRICE_ID;
 
   function handleCheckout() {
-    if (!window.Paddle) {
+    if (typeof Paddle === 'undefined') {
       console.error("Paddle.js not loaded");
       return;
     }
@@ -42,7 +39,7 @@ export default function PaywallOverlay({ auditId, repoUrl }: PaywallOverlayProps
       return;
     }
 
-    window.Paddle.Checkout.open({
+    Paddle.Checkout.open({
       items: [{ priceId, quantity: 1 }],
       customData: { audit_id: auditId },
     });

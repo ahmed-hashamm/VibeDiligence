@@ -53,17 +53,23 @@ export default function RootLayout({
         {/* Paddle.js SDK — loaded before checkout can be triggered */}
         <Script
           src="https://cdn.paddle.com/paddle/v2/paddle.js"
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
         />
         <Script
           id="paddle-init"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
-              if (typeof Paddle !== 'undefined') {
-                ${process.env.NEXT_PUBLIC_PADDLE_ENV === 'sandbox' ? 'Paddle.Environment.set("sandbox");' : ''}
-                Paddle.Setup({ token: "${process.env.NEXT_PUBLIC_PADDLE_CLIENT_TOKEN || ''}" });
-              }
+              (function initPaddle() {
+                if (typeof Paddle !== 'undefined' && Paddle.Initialize) {
+                  Paddle.Initialize({
+                    token: "${process.env.NEXT_PUBLIC_PADDLE_CLIENT_TOKEN || ''}",
+                    ${process.env.NEXT_PUBLIC_PADDLE_ENV === 'sandbox' ? 'environment: "sandbox",' : ''}
+                  });
+                } else {
+                  setTimeout(initPaddle, 200);
+                }
+              })();
             `,
           }}
         />

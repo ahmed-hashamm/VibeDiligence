@@ -5,6 +5,7 @@
 
 import { LegalSection } from "@/types/audit";
 import PrivacySectionItem from "./PrivacySectionItem";
+import ScrollReveal from "@/components/ScrollReveal";
 
 interface PrivacySectionsListProps {
   sections: LegalSection[];
@@ -17,8 +18,10 @@ interface PrivacySectionsListProps {
 export default function PrivacySectionsList({ sections }: PrivacySectionsListProps) {
   return (
     <div className="space-y-32">
-      {sections.map((section) => (
-        <PrivacySectionItem key={section.id} section={section} />
+      {sections.map((section, index) => (
+        <ScrollReveal key={section.id} delay={index * 0.05}>
+          <PrivacySectionItem section={section} />
+        </ScrollReveal>
       ))}
     </div>
   );

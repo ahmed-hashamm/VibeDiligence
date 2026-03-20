@@ -25,9 +25,7 @@ export default function PrivacyContent() {
         />
       </ScrollReveal>
 
-      <ScrollReveal delay={0.1}>
-        <PrivacySectionsList sections={PRIVACY_CONTENT.sections} />
-      </ScrollReveal>
+      <PrivacySectionsList sections={PRIVACY_CONTENT.sections} />
 
       <ScrollReveal delay={0.2}>
         <LegalContactCard 

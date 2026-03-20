@@ -48,7 +48,7 @@ export default function ScrollReveal({
         x: 0,
         y: 0,
       }}
-      viewport={{ once, amount: 0.2 }}
+      viewport={{ once, amount: 0.1 }}
       transition={{
         duration,
         delay,

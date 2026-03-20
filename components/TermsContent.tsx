@@ -25,9 +25,7 @@ export default function TermsContent() {
         />
       </ScrollReveal>
       
-      <ScrollReveal delay={0.1}>
-        <TermsSectionsList sections={TERMS_CONTENT.sections} />
-      </ScrollReveal>
+      <TermsSectionsList sections={TERMS_CONTENT.sections} />
 
       {TERMS_CONTENT.faqs && (
         <ScrollReveal delay={0.2}>
