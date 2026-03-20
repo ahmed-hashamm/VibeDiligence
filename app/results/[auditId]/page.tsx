@@ -12,6 +12,9 @@ import { supabaseAdmin } from "@/lib/supabase";
 import { isValidUUID } from "@/lib/validation";
 import type { AuditRow } from "@/types/audit";
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 /**
  * ResultsPage — server component.
  * 1. Validates auditId as UUID → notFound() if invalid

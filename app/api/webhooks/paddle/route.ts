@@ -18,18 +18,33 @@ const getResend = () => new Resend(process.env.RESEND_API_KEY);
 
 /**
  * Verifies the Paddle webhook signature using HMAC-SHA256 with timing-safe comparison.
+ * Paddle-Signature header format: "ts=1234567890;h1=abc123def456..."
+ * Signed payload format: "timestamp:rawBody"
  * @returns true if the signature is valid.
  */
-function verifyPaddleSignature(rawBody: string, signature: string): boolean {
+function verifyPaddleSignature(rawBody: string, signatureHeader: string): boolean {
   const secret = process.env.PADDLE_WEBHOOK_SECRET;
   if (!secret) return false;
 
+  // Parse "ts=...;h1=..." format from Paddle-Signature header
+  const parts: Record<string, string> = {};
+  for (const segment of signatureHeader.split(';')) {
+    const eqIndex = segment.indexOf('=');
+    if (eqIndex === -1) continue;
+    parts[segment.slice(0, eqIndex)] = segment.slice(eqIndex + 1);
+  }
+
+  const ts = parts['ts'];
+  const h1 = parts['h1'];
+  if (!ts || !h1) return false;
+
+  // Signed payload = "timestamp:rawBody"
   const expected = crypto
     .createHmac('sha256', secret)
-    .update(rawBody)
+    .update(`${ts}:${rawBody}`)
     .digest('hex');
 
-  const sigBuffer = Buffer.from(signature, 'hex');
+  const sigBuffer = Buffer.from(h1, 'hex');
   const expectedBuffer = Buffer.from(expected, 'hex');
 
   if (sigBuffer.length !== expectedBuffer.length) return false;

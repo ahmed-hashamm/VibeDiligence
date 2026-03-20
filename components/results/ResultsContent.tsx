@@ -9,6 +9,7 @@ import ResultsTeaser from "./ResultsTeaser";
 import PaywallOverlay from "./PaywallOverlay";
 import { ShieldIcon } from "lucide-react";
 import type { AuditRow } from "@/types/audit";
+import ScrollReveal from "@/components/ScrollReveal";
 
 interface ResultsContentProps {
   audit: AuditRow;
@@ -21,23 +22,29 @@ interface ResultsContentProps {
 export default function ResultsContent({ audit }: ResultsContentProps) {
   return (
     <div className="container mx-auto px-6 relative z-10">
-      <SectionHeader
-        eyebrow="Audit Results"
-        heading="Scan Complete."
-        subheading="We've processed your repository. Your technical due diligence report is ready for unlocking."
-      />
+      <ScrollReveal>
+        <SectionHeader
+          eyebrow="Audit Results"
+          heading="Scan Complete."
+          subheading="We've processed your repository. Your technical due diligence report is ready for unlocking."
+        />
+      </ScrollReveal>
 
       <div className="max-w-5xl mx-auto relative">
-        <ResultsTeaser audit={audit} />
-        <PaywallOverlay auditId={audit.id} repoUrl={audit.repo_url} />
+        <ScrollReveal delay={0.2}>
+          <ResultsTeaser audit={audit} />
+          <PaywallOverlay auditId={audit.id} repoUrl={audit.repo_url} />
+        </ScrollReveal>
       </div>
 
-      <div className="mt-20 text-center">
-        <p className="text-muted mb-4">Questions about this audit?</p>
-        <a href="mailto:support@vibediligence.com" className="flex items-center justify-center gap-2 text-pink-500 hover:text-pink-400 font-medium transition-colors">
-          <ShieldIcon size={16} /> Contact Support
-        </a>
-      </div>
+      <ScrollReveal delay={0.4}>
+        <div className="mt-20 text-center">
+          <p className="text-muted mb-4">Questions about this audit?</p>
+          <a href="mailto:support@vibediligence.com" className="flex items-center justify-center gap-2 text-pink-500 hover:text-pink-400 font-medium transition-colors">
+            <ShieldIcon size={16} /> Contact Support
+          </a>
+        </div>
+      </ScrollReveal>
     </div>
   );
 }

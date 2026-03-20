@@ -12,6 +12,7 @@ import SecurityHeadersTable from "./security/SecurityHeadersTable";
 import SecurityExclusions from "./security/SecurityExclusions";
 import SecurityLimitations from "./security/SecurityLimitations";
 import SecurityReporting from "./security/SecurityReporting";
+import ScrollReveal from "@/components/ScrollReveal";
 
 /**
  * SecurityContent component.
@@ -22,26 +23,46 @@ export default function SecurityContent() {
 
   return (
     <>
-      <SecurityHero body={content.mainBody} />
-      <SecurityPillarGrid pillars={content.pillars} />
-      <SecurityHeadersTable headers={content.headers} footer={content.headerFooter} />
-      <SecurityExclusions items={content.whatWeDoNotDo} />
-      <SecurityLimitations 
-        title={content.limitations.title} 
-        intro={content.limitations.intro} 
-        items={content.limitations.items} 
-      />
-      <SecurityReporting 
-        title={content.reporting.title} 
-        email={content.reporting.email} 
-        subject={content.reporting.subject} 
-        thankYou={content.reporting.thankYou} 
-      />
-      <LegalContactCard 
-        title={content.contact.title}
-        description={content.contact.description}
-        email={content.contact.email}
-      />
+      <ScrollReveal>
+        <SecurityHero body={content.mainBody} />
+      </ScrollReveal>
+
+      <ScrollReveal delay={0.1}>
+        <SecurityPillarGrid pillars={content.pillars} />
+      </ScrollReveal>
+
+      <ScrollReveal delay={0.2}>
+        <SecurityHeadersTable headers={content.headers} footer={content.headerFooter} />
+      </ScrollReveal>
+
+      <ScrollReveal delay={0.3}>
+        <SecurityExclusions items={content.whatWeDoNotDo} />
+      </ScrollReveal>
+
+      <ScrollReveal delay={0.1}>
+        <SecurityLimitations 
+          title={content.limitations.title} 
+          intro={content.limitations.intro} 
+          items={content.limitations.items} 
+        />
+      </ScrollReveal>
+
+      <ScrollReveal delay={0.1}>
+        <SecurityReporting 
+          title={content.reporting.title} 
+          email={content.reporting.email} 
+          subject={content.reporting.subject} 
+          thankYou={content.reporting.thankYou} 
+        />
+      </ScrollReveal>
+
+      <ScrollReveal delay={0.2}>
+        <LegalContactCard 
+          title={content.contact.title}
+          description={content.contact.description}
+          email={content.contact.email}
+        />
+      </ScrollReveal>
     </>
   );
 }

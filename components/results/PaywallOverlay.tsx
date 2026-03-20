@@ -1,8 +1,4 @@
-/**
- * @file PaywallOverlay.tsx
- * @description The locked report overlay with Paddle checkout link.
- * Displays when audit.paid === false. Links to Paddle with audit_id in custom_data.
- */
+"use client";
 
 import { Card } from "@/components/ui/Card";
 import { Lock, CheckCircle } from "lucide-react";
@@ -19,9 +15,7 @@ interface PaywallOverlayProps {
  */
 export default function PaywallOverlay({ auditId, repoUrl }: PaywallOverlayProps) {
   const repoName = repoUrl.replace("https://github.com/", "");
-  const checkoutUrl = process.env.NEXT_PUBLIC_PADDLE_CHECKOUT_URL
-    ? `${process.env.NEXT_PUBLIC_PADDLE_CHECKOUT_URL}?custom_data[audit_id]=${auditId}`
-    : "#";
+  const checkoutUrl = `${process.env.NEXT_PUBLIC_PADDLE_CHECKOUT_URL}?custom_data[audit_id]=${auditId}`;
 
   return (
     <div className="absolute inset-0 z-20 flex items-center justify-center p-6">
@@ -51,8 +45,9 @@ export default function PaywallOverlay({ auditId, repoUrl }: PaywallOverlayProps
           >
             Unlock Report • ${PAYWALL_CONTENT.price}
           </a>
+          
           <div className="flex items-center justify-center gap-4 text-[10px] font-mono text-muted uppercase">
-            <span>SECURE PADDLE CHECKOUT</span>
+            <span>SECURE PADDLE</span>
             <span>•</span>
             <span>INSTANT ACCESS</span>
           </div>
@@ -61,3 +56,4 @@ export default function PaywallOverlay({ auditId, repoUrl }: PaywallOverlayProps
     </div>
   );
 }
+

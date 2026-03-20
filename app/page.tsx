@@ -12,6 +12,7 @@ import FeaturesSection from "@/components/landing/FeaturesSection";
 import FaqSection from "@/components/landing/FaqSection";
 import PricingSection from "@/components/landing/PricingSection";
 import CtaSection from "@/components/landing/CtaSection";
+import ScrollReveal from "@/components/ScrollReveal";
 
 /**
  * LandingPage component.
@@ -19,15 +20,36 @@ import CtaSection from "@/components/landing/CtaSection";
  */
 export default function LandingPage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between">
+    <main className="flex min-h-screen flex-col items-center justify-between w-full overflow-x-hidden">
       <HeroSection />
-      <StatsBar />
-      <ProblemSection />
-      <StepsSection />
-      <FeaturesSection />
-      <FaqSection />
-      <PricingSection />
-      <CtaSection />
+      
+      <ScrollReveal className="w-full">
+        <StatsBar />
+      </ScrollReveal>
+
+      <ScrollReveal className="w-full">
+        <ProblemSection />
+      </ScrollReveal>
+
+      <ScrollReveal className="w-full">
+        <StepsSection />
+      </ScrollReveal>
+
+      <ScrollReveal className="w-full">
+        <FeaturesSection />
+      </ScrollReveal>
+
+      <ScrollReveal className="w-full">
+        <FaqSection />
+      </ScrollReveal>
+
+      <ScrollReveal className="w-full">
+        <PricingSection />
+      </ScrollReveal>
+
+      <ScrollReveal className="w-full">
+        <CtaSection />
+      </ScrollReveal>
     </main>
   );
 }

@@ -7,6 +7,7 @@
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import AuditForm from "@/components/AuditForm";
 import GridBackground from "@/animations/svgs/GridBackground";
+import ScrollReveal from "@/components/ScrollReveal";
 
 /**
  * AuditPage component.
@@ -18,13 +19,17 @@ export default function AuditPage() {
       <GridBackground />
       
       <div className="container mx-auto px-6 relative z-10">
-        <SectionHeader
-          eyebrow="Intake Form"
-          heading="Initialize your scan."
-          subheading="Paste your repository details below. Our agentic AI will begin the audit immediately."
-        />
+        <ScrollReveal>
+          <SectionHeader
+            eyebrow="Intake Form"
+            heading="Initialize your scan."
+            subheading="Paste your repository details below. Our agentic AI will begin the audit immediately."
+          />
+        </ScrollReveal>
 
-        <AuditForm />
+        <ScrollReveal delay={0.2}>
+          <AuditForm />
+        </ScrollReveal>
       </div>
 
     </main>
