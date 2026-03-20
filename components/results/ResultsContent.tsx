@@ -33,7 +33,7 @@ export default function ResultsContent({ audit }: ResultsContentProps) {
       <div className="max-w-5xl mx-auto relative">
         <ScrollReveal delay={0.2}>
           <ResultsTeaser audit={audit} />
-          <PaywallOverlay auditId={audit.id} repoUrl={audit.repo_url} />
+          <PaywallOverlay auditId={audit.id} repoUrl={audit.repo_url} email={audit.email} />
         </ScrollReveal>
       </div>
 

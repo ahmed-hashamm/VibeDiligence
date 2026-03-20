@@ -19,6 +19,7 @@ declare const Paddle: {
 interface PaywallOverlayProps {
   auditId: string;
   repoUrl: string;
+  email?: string | null;
 }
 
 /**
@@ -26,7 +27,7 @@ interface PaywallOverlayProps {
  * High-fidelity call-to-action for unlocking the full audit report via Paddle checkout.
  * After successful checkout, polls payment status and auto-reloads when paid.
  */
-export default function PaywallOverlay({ auditId, repoUrl }: PaywallOverlayProps) {
+export default function PaywallOverlay({ auditId, repoUrl, email }: PaywallOverlayProps) {
   const repoName = repoUrl.replace("https://github.com/", "");
   const priceId = process.env.NEXT_PUBLIC_PADDLE_PRICE_ID;
   const [isProcessing, setIsProcessing] = useState(false);
@@ -91,10 +92,18 @@ export default function PaywallOverlay({ auditId, repoUrl }: PaywallOverlayProps
       return;
     }
 
-    Paddle.Checkout.open({
+    const checkoutConfig: any = {
       items: [{ priceId, quantity: 1 }],
       customData: { audit_id: auditId },
-    });
+    };
+
+    // Explicitly pass the customer email if we have it
+    // This forces Paddle to use it for invoices and webhook payloads
+    if (email) {
+      checkoutConfig.customer = { email };
+    }
+
+    Paddle.Checkout.open(checkoutConfig);
   }
 
   // Processing state — show after successful checkout
