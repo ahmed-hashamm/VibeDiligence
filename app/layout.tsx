@@ -67,7 +67,10 @@ export default function RootLayout({
                     token: "${process.env.NEXT_PUBLIC_PADDLE_CLIENT_TOKEN || ''}",
                     eventCallback: function(event) {
                       if (event.name === "checkout.completed") {
-                        setTimeout(function() { window.location.reload(); }, 2000);
+                        const auditId = event.data?.custom_data?.audit_id || "";
+                        window.dispatchEvent(
+                          new CustomEvent("paddle:checkout-completed", { detail: auditId })
+                        );
                       }
                     }
                   });

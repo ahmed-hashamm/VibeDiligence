@@ -49,6 +49,12 @@ const VERDICT_CONFIG: Record<AuditResult['verdict'], { label: string; color: str
 
 // ─── Helpers ───────────────────────────────────────────────────────────────
 
+function getPaddleApiUrl(): string {
+  return process.env.NEXT_PUBLIC_PADDLE_CLIENT_TOKEN?.startsWith('test_')
+    ? 'https://sandbox-api.paddle.com'
+    : 'https://api.paddle.com';
+}
+
 /**
  * Verifies the Paddle webhook signature using HMAC-SHA256 with timing-safe comparison.
  */
@@ -215,7 +221,29 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
   // 4. Extract
   const auditId = event.data?.custom_data?.audit_id;
-  const email = event.data?.customer?.email;
+  let email = event.data?.customer?.email;
+  const customerId = event.data?.customer_id;
+
+  // If email isn't in the webhook payload, fetch it explicitly via the Paddle API
+  if (!email && customerId) {
+    console.log(`[Paddle Webhook] Fetching customer ${customerId} from Paddle API...`);
+    try {
+      const res = await fetch(`${getPaddleApiUrl()}/customers/${customerId}`, {
+        headers: {
+          Authorization: `Bearer ${process.env.PADDLE_API_KEY}`,
+        },
+      });
+      if (res.ok) {
+        const cData = await res.json();
+        email = cData.data?.email;
+        console.log(`[Paddle Webhook] Retrieved buyer email: ${email}`);
+      } else {
+        console.warn(`[Paddle Webhook] Failed to fetch customer API. Status: ${res.status}`);
+      }
+    } catch (err) {
+      console.error('[Paddle Webhook] Network error fetching customer:', err);
+    }
+  }
 
   console.log(`[Paddle Webhook] AuditID: ${auditId}, Email: ${email}`);
 
