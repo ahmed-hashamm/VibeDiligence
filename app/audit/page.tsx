@@ -15,7 +15,7 @@ import ScrollReveal from "@/components/ScrollReveal";
  */
 export default function AuditPage() {
   return (
-    <main className="min-h-screen pt-32 pb-20 bg-bg relative overflow-hidden hero-bg">
+    <main className="min-h-screen pt-32 pb-20 bg-bg relative hero-bg">
       <GridBackground />
       
       <div className="container mx-auto px-6 relative z-10">

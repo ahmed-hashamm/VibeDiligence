@@ -41,6 +41,8 @@ canvas+div[style*="position: absolute"] {
 @layer base {
   html {
     font-size: 14.5px; /* Global scale reduction for better density */
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
   }
 
   body {
@@ -49,6 +51,7 @@ canvas+div[style*="position: absolute"] {
     font-family: var(--font-sans);
     line-height: 1.5; /* Slightly tighter than 1.6 */
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
 }
 

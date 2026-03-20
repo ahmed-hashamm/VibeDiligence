@@ -13,7 +13,7 @@ import ReportContent from "@/components/report/ReportContent";
  */
 export default function ExampleReportPage() {
   return (
-    <main className="min-h-screen pt-32 pb-40 bg-bg relative overflow-hidden hero-bg">
+    <main className="min-h-screen pt-32 pb-40 bg-bg relative hero-bg">
       <GridBackground />
       <ReportContent />
     </main>

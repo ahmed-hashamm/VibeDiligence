@@ -45,7 +45,7 @@ export default async function ResultsPage({ params }: { params: { auditId: strin
 
   // 3. Render based on payment status
   return (
-    <main className="min-h-screen pt-32 pb-20 bg-bg relative overflow-hidden">
+    <main className="min-h-screen pt-32 pb-20 bg-bg relative">
       <GridBackground />
       {auditData.paid ? (
         <UnlockedReport audit={auditData} />
