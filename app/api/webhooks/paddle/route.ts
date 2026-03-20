@@ -56,11 +56,11 @@ function verifyPaddleSignature(rawBody: string, signatureHeader: string): boolea
  * Sends the audit report delivery email via Resend.
  */
 async function sendReportEmail(email: string, auditId: string, repoUrl: string): Promise<void> {
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://vibediligence.com';
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://vibediligence.tech';
 
   try {
     await getResend().emails.send({
-      from: 'VibeDiligence <audit@vibediligence.com>',
+      from: 'VibeDiligence <audit@vibediligence.tech>',
       to: email,
       subject: 'Your VibeDiligence Audit Report is Ready',
       html: `

@@ -64,7 +64,7 @@ export default function RootLayout({
                 if (typeof Paddle !== 'undefined' && Paddle.Initialize) {
                   Paddle.Initialize({
                     token: "${process.env.NEXT_PUBLIC_PADDLE_CLIENT_TOKEN || ''}",
-                    ${process.env.NEXT_PUBLIC_PADDLE_ENV === 'sandbox' ? 'environment: "sandbox",' : ''}
+                    environment: "sandbox",
                   });
                 } else {
                   setTimeout(initPaddle, 200);
