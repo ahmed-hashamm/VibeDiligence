@@ -1,3 +1,5 @@
+"use client";
+
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { PRICING_TIERS, REASSURANCES, PRICING_CONTENT } from "@/data/landing";
