@@ -11,7 +11,7 @@ import React from 'react';
  */
 export default function TechLogos() {
   return (
-    <div className="flex items-center gap-6  animate-pulse transition-opacity duration-500">
+    <div className="flex items-center gap-6  animate-pulse  ">
       {/* Node.js */}
       <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
         <path d="M12 2L4.5 6.34v8.66L12 19.34l7.5-4.34V6.34L12 2zm.6 14.5l-4.1-2.35v-4.3l4.1 2.35v4.3zm0-5.7l-4.1-2.35 4.1-2.35 4.1 2.35-4.1 2.35z" />
