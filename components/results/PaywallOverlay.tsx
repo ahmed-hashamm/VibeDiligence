@@ -1,8 +1,9 @@
 "use client";
 
 import { Card } from "@/components/ui/Card";
-import { Lock, CheckCircle } from "lucide-react";
+import { Lock, CheckCircle, Loader2 } from "lucide-react";
 import { PAYWALL_CONTENT } from "@/data/audit-labels";
+import { useState, useEffect, useCallback } from "react";
 
 /** Paddle.js v2 global type declaration for TypeScript */
 declare const Paddle: {
@@ -23,11 +24,62 @@ interface PaywallOverlayProps {
 /**
  * PaywallOverlay component.
  * High-fidelity call-to-action for unlocking the full audit report via Paddle checkout.
- * Uses Paddle.js overlay checkout (Paddle Billing v2).
+ * After successful checkout, polls payment status and auto-reloads when paid.
  */
 export default function PaywallOverlay({ auditId, repoUrl }: PaywallOverlayProps) {
   const repoName = repoUrl.replace("https://github.com/", "");
   const priceId = process.env.NEXT_PUBLIC_PADDLE_PRICE_ID;
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  /**
+   * Polls the payment status API until paid=true, then reloads the page.
+   */
+  const pollPaymentStatus = useCallback(async () => {
+    const maxAttempts = 30; // 60 seconds max
+    let attempts = 0;
+
+    const poll = async () => {
+      attempts++;
+      try {
+        const res = await fetch(`/api/audit/${auditId}/status`);
+        const data = await res.json() as { paid: boolean };
+        if (data.paid) {
+          window.location.reload();
+          return;
+        }
+      } catch {
+        // Network error, keep polling
+      }
+
+      if (attempts < maxAttempts) {
+        setTimeout(poll, 2000);
+      } else {
+        // Fallback: reload anyway after 60s
+        window.location.reload();
+      }
+    };
+
+    // Wait 3 seconds for webhook to process, then start polling
+    setTimeout(poll, 3000);
+  }, [auditId]);
+
+  /**
+   * Listen for Paddle checkout.completed event dispatched from layout.tsx
+   */
+  useEffect(() => {
+    function handleCheckoutComplete(e: Event) {
+      const customEvent = e as CustomEvent<string>;
+      if (customEvent.detail === auditId || !customEvent.detail) {
+        setIsProcessing(true);
+        pollPaymentStatus();
+      }
+    }
+
+    window.addEventListener("paddle:checkout-completed", handleCheckoutComplete);
+    return () => {
+      window.removeEventListener("paddle:checkout-completed", handleCheckoutComplete);
+    };
+  }, [auditId, pollPaymentStatus]);
 
   function handleCheckout() {
     if (typeof Paddle === 'undefined') {
@@ -43,6 +95,24 @@ export default function PaywallOverlay({ auditId, repoUrl }: PaywallOverlayProps
       items: [{ priceId, quantity: 1 }],
       customData: { audit_id: auditId },
     });
+  }
+
+  // Processing state — show after successful checkout
+  if (isProcessing) {
+    return (
+      <div className="absolute inset-0 z-20 flex items-center justify-center p-6">
+        <Card className="max-w-lg w-full p-10 md:p-12 border-emerald-500/50 shadow-[0_0_80px_rgba(16,199,132,0.2)] bg-surface-raised/95 backdrop-blur-md text-center">
+          <div className="w-16 h-16 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-500 mx-auto mb-8">
+            <Loader2 size={32} className="animate-spin" />
+          </div>
+          <h3 className="text-3xl font-bold mb-4">Payment Received!</h3>
+          <p className="text-secondary leading-relaxed">
+            Unlocking your full report for <span className="text-primary font-bold">{repoName}</span>...
+          </p>
+          <p className="text-muted text-sm mt-4">This usually takes a few seconds.</p>
+        </Card>
+      </div>
+    );
   }
 
   return (

@@ -4,17 +4,79 @@
  * Displays all scores, issues, critical findings, and top 5 fixes with PDF download.
  */
 
+/**
+ * @file UnlockedReport.tsx
+ * @description Full unlocked audit report view for paid audits.
+ * Displays all scores, issues, critical findings, and top 5 fixes with PDF download.
+ */
+
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
-import { Download, AlertTriangle, CheckCircle2, ShieldAlert, XCircle } from "lucide-react";
+import { Download, AlertTriangle, CheckCircle2, ShieldAlert, XCircle, MapPin, Wrench, Zap, ChevronDown } from "lucide-react";
 import { SECTION_LABELS, VERDICT_CONFIG, PRIORITY_COLORS } from "@/data/audit-labels";
 import { getScoreColor } from "@/types/audit";
-import type { AuditRow, AuditResult } from "@/types/audit";
+import type { AuditRow, AuditResult, AuditIssue } from "@/types/audit";
 import ScrollReveal from "@/components/ScrollReveal";
 
 interface UnlockedReportProps {
   audit: AuditRow;
+}
+
+const SEVERITY_COLORS: Record<AuditIssue["severity"], string> = {
+  critical: "#FF4444",
+  high: "#FF7A00",
+  medium: "#F0A500",
+  low: "#16C784",
+};
+
+/**
+ * IssueCard — renders a single detailed AuditIssue with location, snippet, explanation, fix.
+ */
+function IssueCard({ issue }: { issue: AuditIssue }) {
+  return (
+    <div className="border border-white/5 rounded-lg p-5 space-y-4 bg-white/[0.02]">
+      {/* Title + severity */}
+      <div className="flex items-start justify-between gap-4">
+        <p className="font-semibold text-sm">{issue.title}</p>
+        <span
+          className="text-[10px] font-mono font-bold uppercase tracking-widest px-2 py-1 rounded flex-shrink-0"
+          style={{
+            color: SEVERITY_COLORS[issue.severity],
+            backgroundColor: `${SEVERITY_COLORS[issue.severity]}15`,
+          }}
+        >
+          {issue.severity}
+        </span>
+      </div>
+
+      {/* Location */}
+      {issue.location && issue.location !== "N/A" && (
+        <div className="flex items-center gap-2 text-xs text-muted font-mono">
+          <MapPin size={11} className="flex-shrink-0" />
+          <span className="truncate">{issue.location}</span>
+        </div>
+      )}
+
+      {/* Code snippet */}
+      {issue.code_snippet && issue.code_snippet !== "N/A" && (
+        <pre className="text-xs font-mono bg-black/40 border border-white/5 rounded p-3 overflow-x-auto text-secondary/70 whitespace-pre-wrap">
+          {issue.code_snippet}
+        </pre>
+      )}
+
+      {/* Explanation */}
+      <p className="text-xs text-secondary/60 leading-relaxed">{issue.explanation}</p>
+
+      {/* Fix */}
+      <div className="border-t border-white/5 pt-3">
+        <p className="text-[10px] font-mono text-[#16C784] uppercase tracking-widest mb-2 flex items-center gap-1">
+          <Wrench size={10} /> Fix
+        </p>
+        <p className="text-xs text-secondary/70 leading-relaxed font-mono">{issue.fix}</p>
+      </div>
+    </div>
+  );
 }
 
 /**
@@ -45,7 +107,7 @@ export default function UnlockedReport({ audit }: UnlockedReportProps) {
 
       {/* Header with score + PDF download */}
       <ScrollReveal delay={0.2}>
-        <div className="max-w-5xl mx-auto mb-16">
+        <div className="max-w-5xl mx-auto mb-10">
           <Card className="p-8 md:p-12">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
               <div className="space-y-4">
@@ -65,6 +127,12 @@ export default function UnlockedReport({ audit }: UnlockedReportProps) {
                     {new Date(audit.created_at).toLocaleDateString()}
                   </span>
                 </div>
+                {/* Verdict reasoning */}
+                {scores.verdict_reasoning && (
+                  <p className="text-sm text-secondary/60 max-w-md leading-relaxed">
+                    {scores.verdict_reasoning}
+                  </p>
+                )}
               </div>
               <div className="flex items-center gap-8">
                 <div className="text-center">
@@ -87,15 +155,49 @@ export default function UnlockedReport({ audit }: UnlockedReportProps) {
         </div>
       </ScrollReveal>
 
-      {/* Section score cards */}
-      <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+      {/* Executive Summary */}
+      {scores.executive_summary && (
+        <ScrollReveal delay={0.25}>
+          <div className="max-w-5xl mx-auto mb-10">
+            <Card className="p-8">
+              <p className="text-xs font-mono text-muted uppercase tracking-widest mb-4">Executive Summary</p>
+              <p className="text-secondary/80 leading-relaxed">{scores.executive_summary}</p>
+            </Card>
+          </div>
+        </ScrollReveal>
+      )}
+
+      {/* Strengths */}
+      {scores.strengths && scores.strengths.length > 0 && (
+        <ScrollReveal delay={0.3}>
+          <div className="max-w-5xl mx-auto mb-16">
+            <Card className="p-8">
+              <p className="text-xs font-mono text-[#16C784] uppercase tracking-widest mb-4 flex items-center gap-2">
+                <CheckCircle2 size={12} /> What This Codebase Does Well
+              </p>
+              <ul className="space-y-2">
+                {scores.strengths.map((s, i) => (
+                  <li key={i} className="text-sm text-secondary/70 flex items-start gap-2">
+                    <Zap size={13} className="text-[#16C784] flex-shrink-0 mt-0.5" />
+                    {s}
+                  </li>
+                ))}
+              </ul>
+            </Card>
+          </div>
+        </ScrollReveal>
+      )}
+
+      {/* Section detail cards */}
+      <div className="max-w-5xl mx-auto space-y-8 mb-16">
         {sections.map((s, index) => {
           const section = scores[s.key];
           return (
             <ScrollReveal key={s.key} delay={0.1 * index}>
-              <Card className="p-8 h-full">
-                <div className="flex justify-between items-start mb-6">
-                  <h3 className="text-lg font-bold">{s.label}</h3>
+              <Card className="p-8">
+                {/* Section header */}
+                <div className="flex justify-between items-start mb-2">
+                  <h3 className="text-xl font-bold">{s.label}</h3>
                   <span
                     className="text-3xl font-bold font-mono"
                     style={{ color: getScoreColor(section.score) }}
@@ -103,6 +205,11 @@ export default function UnlockedReport({ audit }: UnlockedReportProps) {
                     {section.score}
                   </span>
                 </div>
+
+                {/* Summary */}
+                {section.summary && (
+                  <p className="text-sm text-secondary/60 leading-relaxed mb-6">{section.summary}</p>
+                )}
 
                 {/* Critical issues */}
                 {section.critical.length > 0 && (
@@ -121,20 +228,17 @@ export default function UnlockedReport({ audit }: UnlockedReportProps) {
                   </div>
                 )}
 
-                {/* Issues */}
+                {/* Detailed issues */}
                 {section.issues.length > 0 && (
                   <div>
-                    <p className="text-xs font-mono text-muted uppercase tracking-widest mb-3 flex items-center gap-2">
-                      <AlertTriangle size={12} /> Issues Found
+                    <p className="text-xs font-mono text-muted uppercase tracking-widest mb-4 flex items-center gap-2">
+                      <AlertTriangle size={12} /> Issues Found ({section.issues.length})
                     </p>
-                    <ul className="space-y-2">
+                    <div className="space-y-4">
                       {section.issues.map((issue, i) => (
-                        <li key={i} className="text-sm text-secondary/60 flex items-start gap-2">
-                          <CheckCircle2 size={14} className="text-muted flex-shrink-0 mt-0.5" />
-                          {issue}
-                        </li>
+                        <IssueCard key={i} issue={issue} />
                       ))}
-                    </ul>
+                    </div>
                   </div>
                 )}
               </Card>
@@ -154,25 +258,55 @@ export default function UnlockedReport({ audit }: UnlockedReportProps) {
         <div className="space-y-4">
           {scores.top_5_fixes.map((fix, i) => (
             <ScrollReveal key={i} delay={0.1 * i} direction="left">
-              <Card className="p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <div className="flex items-start gap-4">
-                  <span className="text-2xl font-black font-mono text-muted/30">{i + 1}</span>
-                  <div>
-                    <p className="font-semibold mb-1">{fix.issue}</p>
-                    <div className="flex items-center gap-3">
-                      <span
-                        className="text-[10px] font-mono font-bold uppercase tracking-widest px-2 py-1 rounded"
-                        style={{
-                          color: PRIORITY_COLORS[fix.priority as keyof typeof PRIORITY_COLORS],
-                          backgroundColor: `${PRIORITY_COLORS[fix.priority as keyof typeof PRIORITY_COLORS]}15`,
-                        }}
-                      >
-                        {fix.priority}
-                      </span>
-                      <span className="text-xs text-muted font-mono">~{fix.est_hours}h estimated</span>
+              <Card className="p-6 flex flex-col gap-4">
+                {/* Top row */}
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                  <div className="flex items-start gap-4">
+                    <span className="text-2xl font-black font-mono text-muted/30">{i + 1}</span>
+                    <div>
+                      <p className="font-semibold mb-1">{fix.issue}</p>
+                      <div className="flex items-center gap-3 flex-wrap">
+                        <span
+                          className="text-[10px] font-mono font-bold uppercase tracking-widest px-2 py-1 rounded"
+                          style={{
+                            color: PRIORITY_COLORS[fix.priority as keyof typeof PRIORITY_COLORS],
+                            backgroundColor: `${PRIORITY_COLORS[fix.priority as keyof typeof PRIORITY_COLORS]}15`,
+                          }}
+                        >
+                          {fix.priority}
+                        </span>
+                        <span className="text-xs text-muted font-mono">~{fix.est_hours}h estimated</span>
+                        {fix.location && (
+                          <span className="text-xs text-muted font-mono flex items-center gap-1">
+                            <MapPin size={10} /> {fix.location}
+                          </span>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
+
+                {/* Impact */}
+                {fix.impact && (
+                  <p className="text-xs text-secondary/60 leading-relaxed pl-10">{fix.impact}</p>
+                )}
+
+                {/* Fix steps */}
+                {fix.fix_steps && fix.fix_steps.length > 0 && (
+                  <div className="pl-10">
+                    <p className="text-[10px] font-mono text-[#16C784] uppercase tracking-widest mb-2 flex items-center gap-1">
+                      <Wrench size={10} /> Steps to Fix
+                    </p>
+                    <ol className="space-y-1">
+                      {fix.fix_steps.map((step, j) => (
+                        <li key={j} className="text-xs text-secondary/60 flex items-start gap-2">
+                          <span className="font-mono text-muted/50 flex-shrink-0">{j + 1}.</span>
+                          {step}
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                )}
               </Card>
             </ScrollReveal>
           ))}

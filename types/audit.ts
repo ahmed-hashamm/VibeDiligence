@@ -1,11 +1,41 @@
-export type AuditSection = { score: number; issues: string[]; critical: string[] };
-export type AuditFix = { issue: string; priority: 'critical' | 'high' | 'medium'; est_hours: number };
-export type AuditResult = {
-  security: AuditSection; production_readiness: AuditSection;
-  code_quality: AuditSection; scalability: AuditSection;
-  verdict: 'ready_to_raise' | 'fix_first' | 'needs_work';
-  top_5_fixes: AuditFix[]; overall_score: number;
+export type AuditIssue = {
+  title: string;
+  severity: 'critical' | 'high' | 'medium' | 'low';
+  location: string;
+  code_snippet: string;
+  explanation: string;
+  fix: string;
 };
+
+export type AuditSection = {
+  score: number;
+  summary: string;
+  issues: AuditIssue[];
+  critical: string[];
+};
+
+export type AuditFix = {
+  issue: string;
+  location: string;
+  priority: 'critical' | 'high' | 'medium';
+  est_hours: number;
+  impact: string;
+  fix_steps: string[];
+};
+
+export type AuditResult = {
+  security: AuditSection;
+  production_readiness: AuditSection;
+  code_quality: AuditSection;
+  scalability: AuditSection;
+  verdict: 'ready_to_raise' | 'fix_first' | 'needs_work';
+  verdict_reasoning: string;
+  top_5_fixes: AuditFix[];
+  overall_score: number;
+  executive_summary: string;
+  strengths: string[];
+};
+
 export type IntakeForm = { repo_url: string; framework: string; auth: string; database: string; deployment: string };
 export type AuditRow = { id: string; repo_url: string; framework: string; auth: string; database: string; deployment: string; scores: AuditResult; verdict: string; paid: boolean; email: string | null; created_at: string };
 
@@ -52,11 +82,11 @@ export type LegalContent = {
   };
 };
 
-export type Metric = { 
-  label: string; 
-  score: number; 
-  status: string; 
-  color: string; 
+export type Metric = {
+  label: string;
+  score: number;
+  status: string;
+  color: string;
 };
 
 export type Finding = {
