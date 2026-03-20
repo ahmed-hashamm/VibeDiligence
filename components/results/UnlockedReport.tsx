@@ -52,7 +52,7 @@ function IssueCard({ issue }: { issue: AuditIssue }) {
 
       {/* Location */}
       {issue.location && issue.location !== "N/A" && (
-        <div className="flex items-center gap-2 text-xs text-muted font-mono">
+        <div className="flex items-center gap-2 text-sm text-muted font-mono">
           <MapPin size={11} className="flex-shrink-0" />
           <span className="truncate">{issue.location}</span>
         </div>
@@ -279,7 +279,7 @@ export default function UnlockedReport({ audit }: UnlockedReportProps) {
                 {/* Detailed issues */}
                 {section.issues.length > 0 && (
                   <div>
-                    <p className="text-xs font-mono text-muted uppercase tracking-widest mb-4 flex items-center gap-2">
+                    <p className="text-sm font-mono text-muted uppercase tracking-widest mb-4 flex items-center gap-2">
                       <AlertTriangle size={12} /> Issues Found ({section.issues.length})
                     </p>
                     <div className="space-y-4">
