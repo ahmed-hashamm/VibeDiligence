@@ -278,3 +278,18 @@ main {
 .animate-float {
   animation: float 3s ease-in-out infinite;
 }
+
+@keyframes bounce-subtle {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-12px); }
+  60% { transform: translateY(-6px); }
+}
+
+#chatbase-bubble-button {
+  animation: bounce-subtle 4s ease-in-out infinite !important;
+  transition: all 0.3s ease !important;
+}
+
+#chatbase-bubble-button:hover {
+  transform: scale(1.1) translateY(-5px) !important;
+}

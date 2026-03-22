@@ -7,13 +7,13 @@ import { Shield, Lock, Zap, Server, CreditCard, Cloud } from "lucide-react";
 import { LegalContent } from "@/types/audit";
 
 export const PRIVACY_CONTENT: LegalContent = {
-  eyebrow: "COMPLIANCE POLICY V1.0",
+  eyebrow: "PRIVACY POLICY V1.0",
   heading: "Privacy <span class='text-pink-500'>—</span> VibeDiligence",
   // subheading: "and VibeDiligence, the solution with vibe.",
   lastUpdated: "Last updated: March 19, 2026",
   intro: "VibeDiligence ('we', 'us', or 'our') is a product of VibeDiligence Limited (represented by vibediligence.tech). This Privacy Policy explains what personal data we collect, how we use it, and your rights regarding that data.",
   acknowledgement: "By using VibeDiligence, you acknowledge that you have read and understood this Privacy Policy.",
-  contactLine: "For any privacy-related inquiries, contact us at: support@vibediligence.tech",
+  // contactLine: "For any privacy-related inquiries, contact us at: support@vibediligence.tech",
   sections: [
     {
       id: "1",
@@ -191,7 +191,7 @@ export const PRIVACY_CONTENT: LegalContent = {
 };
 
 export const TERMS_CONTENT: LegalContent = {
-  eyebrow: "LEGAL INFRASTRUCTURE V1.0",
+  eyebrow: "TERMS OF SERVICE V1.0",
   heading: "Terms <span class='text-pink-500'>—</span> VibeDiligence",
   lastUpdated: "Last updated: March 2026",
   intro: "VibeDiligence ('Service', 'we', 'us', 'our') is an AI-powered technical audit service accessible at vibediligence.tech.",
@@ -468,7 +468,7 @@ export const TERMS_CONTENT: LegalContent = {
 };
 
 export const SECURITY_CONTENT = {
-  eyebrow: "SECURITY — VIBEDILIGENCE",
+  eyebrow: "SECURITY POLICY V1.0",
   heading: "Security <span class='text-pink-500'>—</span> VibeDiligence",
   lastUpdated: "Last updated: March 19, 2026",
   metadata: [

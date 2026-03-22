@@ -16,7 +16,7 @@ import ScrollReveal from "@/components/ScrollReveal";
  */
 export default function AboutContent() {
   return (
-    <div className="max-w-[1400px] mx-auto px-12 relative z-10">
+    <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
       <ScrollReveal>
         {/* Hero Section */}
         <PageHero
