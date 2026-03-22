@@ -4,8 +4,14 @@
  * Rule: Imports and JSX only. Pure entry point.
  */
 
+import { Metadata } from "next";
 import GridBackground from "@/animations/svgs/GridBackground";
 import AboutContent from "@/components/AboutContent";
+
+export const metadata: Metadata = {
+  title: "About Us | Our Mission & Tech",
+  description: "Learn about VibeDiligence, our mission to bring transparency to software, and the proprietary VibeEngine powering our audits.",
+};
 
 /**
  * AboutPage component.

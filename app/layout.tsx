@@ -19,16 +19,64 @@ const jetbrains = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono-va
  * Metadata for the application.
  */
 export const metadata: Metadata = {
-  title: "VibeDiligence — Premium GitHub Repo Audits",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://vibediligence.tech"),
+  title: {
+    default: "VibeDiligence — Premium GitHub Repo Audits",
+    template: "%s | VibeDiligence",
+  },
   description: "Advanced repo auditing for technical due diligence. Get instant security, scalability, and quality scores for any repository.",
+  keywords: ["GitHub Audit", "Technical Due Diligence", "Code Quality", "Security Scan", "SaaS Audit", "VibeDiligence"],
+  authors: [{ name: "VibeDiligence Team" }],
+  creator: "VibeDiligence",
+  publisher: "VibeDiligence",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://vibediligence.tech",
+    siteName: "VibeDiligence",
+    title: "VibeDiligence — Premium GitHub Repo Audits",
+    description: "Advanced repo auditing for technical due diligence. Get instant security, scalability, and quality scores.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "VibeDiligence — Premium GitHub Repo Audits",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "VibeDiligence — Premium GitHub Repo Audits",
+    description: "Advanced repo auditing for technical due diligence.",
+    images: ["/og-image.png"],
+    creator: "@vibediligence",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   icons: {
     icon: "/icon.png",
+    shortcut: "/icon.png",
+    apple: "/icon.png",
   },
 };
 
 /**
  * RootLayout component.
-
  * Provides the global HTML/Body structure and common UI elements.
  */
 export default function RootLayout({
@@ -36,6 +84,20 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "VibeDiligence",
+    "operatingSystem": "Web",
+    "applicationCategory": "DeveloperApplication",
+    "description": "Advanced GitHub repository auditing for technical due diligence. Get instant security, scalability, and quality scores.",
+    "offers": {
+      "@type": "Offer",
+      "price": "49.00",
+      "priceCurrency": "USD"
+    }
+  };
+
   return (
     <html lang="en" className="dark scroll-smooth">
       <head>
@@ -43,6 +105,10 @@ export default function RootLayout({
         <script
           type="module"
           src="https://unpkg.com/@splinetool/viewer@1.12.69/build/spline-viewer.js"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
       <body className={cn(inter.variable, jetbrains.variable, "bg-bg text-primary antialiased")}>

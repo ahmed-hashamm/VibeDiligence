@@ -4,10 +4,16 @@
  * Rule: Page component remains a pure entry point with imports only.
  */
 
+import { Metadata } from "next";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import AuditForm from "@/components/AuditForm";
 import GridBackground from "@/animations/svgs/GridBackground";
 import ScrollReveal from "@/components/ScrollReveal";
+
+export const metadata: Metadata = {
+  title: "Initialize Scan | Repo Intake",
+  description: "Start your GitHub repository audit. Paste your repo URL and get instant feedback on security, scalability, and code quality.",
+};
 
 /**
  * AuditPage component.

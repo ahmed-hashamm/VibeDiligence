@@ -1,7 +1,13 @@
+import { Metadata } from "next";
 import GridBackground from "@/animations/svgs/GridBackground";
 import PrivacyContent from "@/components/PrivacyContent";
 import { PRIVACY_CONTENT } from "@/data/legal";
 import PageHero from "@/components/ui/PageHero";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description: "Our commitment to your privacy. Read the VibeDiligence Privacy Policy to understand how we handle your data.",
+};
 
 /**
  * PrivacyPage component.

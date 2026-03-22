@@ -1,7 +1,13 @@
+import { Metadata } from "next";
 import GridBackground from "@/animations/svgs/GridBackground";
 import SecurityContent from "@/components/SecurityContent";
 import { SECURITY_CONTENT } from "@/data/legal";
 import PageHero from "@/components/ui/PageHero";
+
+export const metadata: Metadata = {
+  title: "Security & Data Protection",
+  description: "Institutional-grade security standards. Learn how VibeDiligence protects your data and ensures repository privacy.",
+};
 
 /**
  * SecurityPage component.

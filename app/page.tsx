@@ -4,7 +4,14 @@
  * Rule: Imports and JSX only. No logic or data.
  */
 
+import { Metadata } from "next";
 import HeroSection from "@/components/landing/HeroSection";
+
+export const metadata: Metadata = {
+  title: "GitHub Audit & Technical Due Diligence",
+  description: "Get institutional-grade security, scalability, and code quality audits for any GitHub repository in seconds.",
+};
+
 import StatsBar from "@/components/landing/StatsBar";
 import ProblemSection from "@/components/landing/ProblemSection";
 import StepsSection from "@/components/landing/StepsSection";

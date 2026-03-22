@@ -3,11 +3,17 @@
  * @description The terms of service page.
  */
 
+import { Metadata } from "next";
 import { PRIVACY_CONTENT, TERMS_CONTENT } from "@/data/legal";
 import PageHero from "@/components/ui/PageHero";
 import TermsContent from "@/components/TermsContent";
 import GridBackground from "@/animations/svgs/GridBackground";
 import FaqSection from "@/components/landing/FaqSection";
+
+export const metadata: Metadata = {
+  title: "Terms of Service",
+  description: "The legal agreement between you and VibeDiligence. Read our Terms of Service for using our audit platform.",
+};
 
 /**
  * TermsPage component.
