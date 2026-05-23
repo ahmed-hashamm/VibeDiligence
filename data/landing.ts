@@ -143,7 +143,7 @@ export const FAQS = [
   },
   {
     question: "Do you offer a refund policy?",
-    answer: "If our engine fails to provide a meaningful audit for your repository, we offer a full 100% money-back guarantee.",
+    answer: "We offer a 14-day money-back guarantee. If you are not satisfied with your audit report, simply contact us within 14 days of purchase for a full refund.",
   },
   {
     question: "Is this a replacement for a manual audit?",
@@ -198,7 +198,7 @@ export const PRICING_TIERS = [
 export const REASSURANCES = [
   "YOUR CODE IS NEVER STORED",
   "REPORT READY IN 60 SECONDS",
-  "REFUND IF WE FAIL TO DELIVER",
+  "14-DAY MONEY-BACK GUARANTEE",
 ];
 
 export const CTA_CONTENT = {

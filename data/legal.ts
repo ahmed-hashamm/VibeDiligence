@@ -313,31 +313,16 @@ export const TERMS_CONTENT: LegalContent = {
       title: "Refund Policy",
       subsections: [
         {
-          title: "5.1 Circumstances Where a Refund Will Be Issued",
-          bullets: [
-            "The audit failed entirely to generate a report due to a confirmed technical error on our side, and we are unable to deliver the report within 72 hours of the original submission",
-            "You were charged more than once for the same audit due to a billing error",
-            "You completed payment but never received your report and our support team is unable to deliver it within 5 business days"
-          ]
+          title: "5.1 Our Merchant of Record",
+          content: "All payments are processed by Paddle.com, which acts as our Merchant of Record. By completing a purchase, you agree to Paddle’s Buyer Terms and Conditions. Paddle manages all payment transactions, tax compliance, invoicing, and refund processing."
         },
         {
-          title: "5.2 Circumstances Where No Refund Will Be Issued",
-          content: "Refunds will not be provided in the following circumstances, and by purchasing you acknowledge and accept this:",
-          bullets: [
-            "You disagree with, dislike, or wish to dispute the findings, scores, or recommendations in your report — AI-generated reports are not a guarantee of any specific finding",
-            "You submitted the incorrect repository URL",
-            "You provided inaccurate stack information that affected the report's relevance",
-            "You changed your mind after the report was generated, whether or not you have downloaded it",
-            "Your repository was private or inaccessible at the time of submission (the Service only supports public repositories, as clearly stated before purchase)",
-            "The report did not identify an issue that was subsequently discovered — our reports are not exhaustive",
-            "More than 30 days have passed since the date of purchase",
-            "You found a cheaper or alternative service after purchasing",
-            "Your use of the report did not produce the business outcome you expected"
-          ]
+          title: "5.2 Refund Request Period",
+          content: "We stand behind the quality of our AI-generated technical audit reports. If you are not satisfied with your purchase, or if you believe there was a billing error, you may request a full refund within 14 days of the transaction date."
         },
         {
-          title: "5.3 Refund Process",
-          content: "To request a refund under Section 5.1, email support@vibediligence.tech with your purchase email address and audit ID (available in your Paddle receipt). We will respond within 5 business days. Approved refunds are issued back to the original payment method via Paddle, subject to Paddle's processing timelines (typically 5–10 business days)."
+          title: "5.3 How to Request a Refund",
+          content: "To request a refund, please submit your request directly to Paddle via paddle.net. Refunds are issued to the original payment method by Paddle, typically within 5–10 business days. For general support queries, you can also reach us at support@vibediligence.tech."
         }
       ]
     },
