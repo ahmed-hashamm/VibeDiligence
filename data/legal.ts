@@ -322,7 +322,7 @@ export const TERMS_CONTENT: LegalContent = {
         },
         {
           title: "5.3 How to Request a Refund",
-          content: "To request a refund, please submit your request directly to Paddle via paddle.net. Refunds are issued to the original payment method by Paddle, typically within 5–10 business days. For general support queries, you can also reach us at support@vibediligence.tech."
+          content: "To request a refund, please submit your request directly to Paddle via paddle.net. Refunds are issued to the original payment method by Paddle, typically within 5–10 business days. For general support queries, reach us at support@vibediligence.tech."
         }
       ]
     },

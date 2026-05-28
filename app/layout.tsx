@@ -128,9 +128,12 @@ export default function RootLayout({
             __html: `
               (function initPaddle() {
                 if (typeof Paddle !== 'undefined' && Paddle.Environment && Paddle.Initialize) {
-                  Paddle.Environment.set("sandbox");
+                  const token = "${process.env.NEXT_PUBLIC_PADDLE_CLIENT_TOKEN || ''}";
+                  if (token.startsWith("test_")) {
+                    Paddle.Environment.set("sandbox");
+                  }
                   Paddle.Initialize({
-                    token: "${process.env.NEXT_PUBLIC_PADDLE_CLIENT_TOKEN || ''}",
+                    token: token,
                     eventCallback: function(event) {
                       if (event.name === "checkout.completed") {
                         const auditId = event.data?.custom_data?.audit_id || "";
