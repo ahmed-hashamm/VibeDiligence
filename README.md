@@ -52,18 +52,28 @@ npm start
 
 ## Tech Stack
 
-- **Frontend**: TypeScript (97.6%)
-- **Styling**: CSS (2.1%)
+- **Frontend**: Next.js with TypeScript (97.6%)
+- **Styling**: Tailwind CSS (2.1%)
 - **JavaScript**: 0.3%
 
 ## Project Structure
 
 ```
 VibeDiligence/
-├── src/
-├── public/
-├── package.json
-└── README.md
+├── app/                    # Next.js app directory with pages and layouts
+├── components/             # Reusable React components
+├── hooks/                  # Custom React hooks
+├── lib/                    # Utility functions and helpers
+├── types/                  # TypeScript type definitions
+├── data/                   # Static data and constants
+├── animations/             # Animation utilities and components
+├── public/                 # Static assets
+├── next.config.mjs         # Next.js configuration
+├── tailwind.config.ts      # Tailwind CSS configuration
+├── tsconfig.json           # TypeScript configuration
+├── postcss.config.js       # PostCSS configuration
+├── package.json            # Project dependencies
+└── README.md               # This file
 ```
 
 ## How It Works
